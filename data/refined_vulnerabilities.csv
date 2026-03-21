@@ -1,0 +1,2662 @@
+﻿repo,type,number,title,labels,created_at,url,body
+Asvix-04/Medibot-AI,issues,15,Validation of the medical datasets,"['good first issue', 'help wanted']",2025-06-20T07:11:25Z,https://github.com/Asvix-04/Medibot-AI/issues/15,The medical datasets that we're using right now needs a validation of its authenticity and accuracy. 
+DavidOsherdiagnostica/israel-drugs-mcp-server,issues,4,Add MseeP.ai badge,[],2025-09-07T07:03:39Z,https://github.com/DavidOsherdiagnostica/israel-drugs-mcp-server/pull/4,"Hi there,
+
+This pull request shares a security update on israel-drugs-mcp-server.
+
+We also have an entry for israel-drugs-mcp-server in our directory, MseeP.ai, where we provide regular security and trust updates on your app.
+
+We invite you to add our badge for your MCP server to your README to help your users learn from a third party that provides ongoing validation of israel-drugs-mcp-server.
+
+You can easily take control over your listing for free: visit it at https://mseep.ai/app/davidosherdi"
+FGA-DIKU/BONSAI,issues,307,Trainer saves best model metrics on every epoch,"['🔴bug', '🚨priority: high', 'effort: small']",2025-07-14T01:41:32Z,https://github.com/FGA-DIKU/BONSAI/issues/307,"In the [trainer.py](https://github.com/FGA-DIKU/EHR/blob/23c0f5408b9e3bc377a460435edc5f60af0b579a/corebehrt/modules/trainer/trainer.py#L437) file, the saving of metrics and curves using best_model_id is currently performed after every epoch, regardless of whether the monitored metric has improved. This leads to misleadingly updating the ""best model"" artifacts even when the model has not improved.
+
+Expected behavior:
+
+Metrics, curves, and related artifacts associated with best_model_id should onl"
+FGA-DIKU/BONSAI,issues,306,remove final separator token if present,[],2025-07-09T13:34:19Z,https://github.com/FGA-DIKU/BONSAI/pull/306,"When censoring if there exists a separator token as the last entry, then this leaks that the patient comes in after censoring
+
+<!-- This is an auto-generated comment: release notes by coderabbit.ai -->
+## Summary by CodeRabbit
+
+* **Bug Fixes**
+  * Improved handling of patient data by ensuring that any trailing separator tokens are removed after censoring, leading to cleaner and more accurate data processing.
+<!-- end of auto-generated comment: release notes by coderabbit.ai -->"
+FGA-DIKU/BONSAI,issues,302,Add positional encoding to associate lab codes with corresponding values,"['🌟feature', '🐞minor-bug']",2025-06-26T09:17:43Z,https://github.com/FGA-DIKU/BONSAI/issues/302,"The attention mechanism in transformers treats all tokens as equally related, without any built-in notion of which tokens are ""next to"" each other. This makes it difficult for the model to understand which lab value corresponds to which lab code.
+
+Proposal:
+
+Introduce an additional positional or relational encoding to explicitly link each lab value with its corresponding lab code, through a shared embedding.
+"
+FGA-DIKU/BONSAI,issues,299,Exclude nan is removing events on additional columns,"['🔴bug', '🚨priority: high', 'effort: small']",2025-06-24T09:22:53Z,https://github.com/FGA-DIKU/BONSAI/issues/299,"Description:
+In some cases, the MEDS table contains additional columns that include None or NaN values not relevant to feature creation. These extra columns can unintentionally cause rows to be dropped when applying NaN filtering.
+
+To address this, we now restrict the concepts DataFrame to only the relevant columns — subject_id, time, and code — before processing. This ensures that NaN filtering is applied only where appropriate and prevents accidental loss of valid events.
+
+Solution:
+Filter to "
+FGA-DIKU/BONSAI,issues,297,Ensure birthdate token is present,"['🔴bug', '🚨priority: high', 'effort: medium']",2025-06-23T18:09:03Z,https://github.com/FGA-DIKU/BONSAI/issues/297,"If ""birthdate"" is missing in MEDS, data creation continues without error, leading to incorrect [background sequence](https://github.com/FGA-DIKU/EHR/blob/65191eba9566cb041e19334306517074bf5968b1/corebehrt/functional/features/creators.py#L157) and possible censoring failures.
+
+Suggestion:
+
+Add a check for ""birthdate"" during data creation.
+
+Also, allow specifying required background codes (e.g., ""gender"") via config or enforce presence of at least one ""BG_"" code."
+FGA-DIKU/BONSAI,issues,296,`inference_loop` crashes on tensor shape mismatch when sequences have variable lengths,"['🔴bug', '🐞minor-bug']",2025-06-23T08:28:46Z,https://github.com/FGA-DIKU/BONSAI/issues/296,"### Description
+During evaluation (`evaluate_finetune.py`), `inference_loop` crashes with a `RuntimeError` when sequences in the dataset have different lengths:
+RuntimeError: Sizes of tensors must match except in dimension 0. Expected size 512 but got size 440
+
+
+
+### Suggestion fix:
+
+```
+def pad_patient(patient, max_length):   # for me for instance max_length=512 
+    pad_fields = {
+        ""concepts"": 0,
+        ""segments"": 0,
+        ""ages"": 0.0,
+        ""abspos"": 0.0,
+    }
+    for field, pad"
+FGA-DIKU/BONSAI,issues,295,log_metrics fails when metric keys are not strings,"['🔴bug', '🐞minor-bug']",2025-06-23T08:05:02Z,https://github.com/FGA-DIKU/BONSAI/issues/295,"### Description
+
+When calling `log_metrics(metrics_dict)`, if any of the keys in the dict are not strings (or even if they are, but not handled correctly), the following error is raised:
+
+TypeError: can only concatenate str (not ""dict"") to str
+
+
+### Expected Behavior
+Either:
+
+-Validate keys before attempting string concatenation.
+Or
+-iterate through the metrics dictionary and log each key-value pair separately
+
+**Suggested fix:**
+
+def log_metrics(metrics: dict, step: int = None):
+    run, prefix"
+FGA-DIKU/BONSAI,issues,290,Bug: Patients info constant incorrectlyt specified,"['🎓good first issue', '🐞minor-bug', 'effort: small']",2025-06-07T07:24:46Z,https://github.com/FGA-DIKU/BONSAI/issues/290,"The patients_info_format defined in: 
+https://github.com/FGA-DIKU/EHR/blob/996cdf55904104d15fe0a40131908d5a2b1aa1ff/corebehrt/constants/paths.py#L29
+and used in 
+https://github.com/FGA-DIKU/EHR/blob/996cdf55904104d15fe0a40131908d5a2b1aa1ff/corebehrt/modules/features/loader.py#L36
+is different from the patient info file name
+https://github.com/FGA-DIKU/EHR/blob/996cdf55904104d15fe0a40131908d5a2b1aa1ff/corebehrt/main/helper/create_data.py#L127
+The bug is silent because the patients_info inside Con"
+FGA-DIKU/BONSAI,issues,284,Bug in background creation,"['🔴bug', '🚨priority: high', 'effort: small']",2025-05-24T11:46:38Z,https://github.com/FGA-DIKU/BONSAI/issues/284,"## Description
+
+The `create_background()` function uses index-based selection to update `TIMESTAMP_COL` values. This approach leads to incorrect behavior when the `concepts` DataFrame contains **duplicate or non-contiguous indices**.
+
+Specifically, this line:
+
+```python
+bg_rows = concepts[concepts[TIMESTAMP_COL].isna()]
+concepts.loc[bg_rows.index, TIMESTAMP_COL] = concepts.loc[bg_rows.index, BIRTHDATE_COL]
+```
+
+will update **all rows with matching indices**, not just the intended subset where `T"
+FGA-DIKU/BONSAI,issues,282,Delayed censoring should exclue the target code,['🔴bug'],2025-05-23T12:01:01Z,https://github.com/FGA-DIKU/BONSAI/issues/282,"Currently delayed censoring would also censor the target delayed and thus leak information.
+https://github.com/FGA-DIKU/EHR/blob/31a0e485d375b73ca00e86f52b72b1899238cf9e/corebehrt/modules/preparation/prepare_data.py#L121"
+FGA-DIKU/BONSAI,issues,275,Adjust doc and logger name,"['📖documentation', '🎓good first issue', '🐞minor-bug', 'effort: small']",2025-05-14T08:51:45Z,https://github.com/FGA-DIKU/BONSAI/issues/275,"The documentation and logging name refer to ""pretrain"". Change to ""fine-tune""
+https://github.com/FGA-DIKU/EHR/blob/31a0e485d375b73ca00e86f52b72b1899238cf9e/corebehrt/modules/setup/directory.py#L356"
+FGA-DIKU/BONSAI,issues,273,**Title: Exclude Specific Codes from Delayed Censoring**,"['🐞minor-bug', 'effort: small', 'Improvement']",2025-05-12T09:56:45Z,https://github.com/FGA-DIKU/BONSAI/issues/273,"
+**Current**
+
+```yaml
+concept_pattern_hours_delay:
+  ""^D"": 72
+```
+
+**Goal**
+Delay all diagnosis codes by 72 h *except* lung-cancer codes (`DC*`), which should be censored immediately.
+
+**Proposed**
+
+```yaml
+concept_pattern_hours_delay:
+  codes:
+    ""^D"": 72      # 72 h delay for diagnoses
+  exclude:
+    - ""^D/DC.*""   # immediate censoring for lung-cancer codes
+```
+
+**Logic**
+
+1. If code matches any `exclude` pattern → delay = 0
+2. Else if it matches a `codes` pattern → apply specified delay
+3. E"
+FGA-DIKU/BONSAI,issues,267,Metrics not displayed in pipelines,"['❓question', '🐞minor-bug']",2025-05-02T14:22:10Z,https://github.com/FGA-DIKU/BONSAI/issues/267,"Metrics that are displayed when run as a single job are not displayed when a pipeline is run
+@StephanLorenzen Do you know why this might be?"
+FGA-DIKU/BONSAI,issues,261,Improve example data,[],2025-04-30T14:11:12Z,https://github.com/FGA-DIKU/BONSAI/pull/261,"Added data with correlated codes, so that basic performance of models can be tested locally. 
+
+<!-- This is an auto-generated comment: release notes by coderabbit.ai -->
+## Summary by CodeRabbit
+
+- **New Features**
+  - Added support for generating and testing correlated medical data, including new configuration files for fine-tuning, testing, and outcome combinations.
+  - Introduced a new combined outcome type with primary and secondary code matching and time window constraints.
+  - Added new te"
+FGA-DIKU/BONSAI,issues,259,Feat/delayed censoring,[],2025-04-29T14:19:36Z,https://github.com/FGA-DIKU/BONSAI/pull/259,"
+
+**Delayed censoring**
+Can be used to censor e.g.  diagnoses differently since those are coded with a time delay. Or apply harsher censoring for certain code groups if there is leakage 
+<!-- This is an auto-generated comment: release notes by coderabbit.ai -->
+## Summary by CodeRabbit
+
+- **New Features**
+  - Introduced support for concept-specific delay periods when censoring patient data, allowing different concepts to have custom delay times before being included.
+  - Added configuration opti"
+FGA-DIKU/BONSAI,issues,254,Bug: incorrect sample weight calculation,"['🔴bug', 'effort: small']",2025-04-24T15:45:07Z,https://github.com/FGA-DIKU/BONSAI/issues/254,"Issue in [trainer.utils](https://github.com/FGA-DIKU/EHR/blob/16c95e0b35723727adfaa095625fa7b63a758ae2/corebehrt/modules/trainer/utils.py) 
+Outcome is a list of zeros and ones, so when passing outcomes to inverse_sqrt we do 1/0 or 1/1 and then pass it so WeightedRandomSamlpler
+```
+def get_sampler(cfg, outcomes: List[int]):
+    """"""Get sampler for training data.
+    If sampler_function is false or undefined, then no sampler is used.
+    If sample_weight_function is defined then the function is use"
+FGA-DIKU/BONSAI,issues,252,Misspecified head,"['🐞minor-bug', 'effort: small']",2025-04-24T09:03:07Z,https://github.com/FGA-DIKU/BONSAI/issues/252,"In our test finetune configs, we still specify the head as:
+
+```
+model:
+  cls:
+    _target_: ehr2vec.model.heads.ClassifierGRU
+    bidirectional: true
+```
+However in the code we always use BiGRU. 
+Current solution: Remove this from the test configs as to avoid confusion."
+FGA-DIKU/BONSAI,issues,251,_⚠️ Potential issue_ sliding window attention mask,"['🎓good first issue', '🐞minor-bug', 'effort: small']",2025-04-23T11:35:16Z,https://github.com/FGA-DIKU/BONSAI/issues/251,"_⚠️ Potential issue_
+
+**Causal masking helper can receive `None` or non‑floating dtypes**
+
+1. `sliding_window_mask` can legitimately be `None` depending on the attention type; calling `make_attention_causal(None)` will crash.  
+
+```diff
+-        if self.is_causal:
+-            global_attention_mask = make_attention_causal(global_attention_mask)
+-            sliding_window_mask = make_attention_causal(sliding_window_mask)
++        if self.is_causal:
++            if global_attention_mask is not No"
+FGA-DIKU/BONSAI,issues,244,_⚠️ Potential issue_ during metric check,"['🐞minor-bug', 'effort: small']",2025-04-19T11:11:00Z,https://github.com/FGA-DIKU/BONSAI/issues/244,"@Montgomeryyyy  this is a potential issue in the new script:
+[corebehrt/main/helper/evaluate_finetune.py](https://github.com/kirilklein/PHAIR_EHR/pull/58/files/22e46297f24795ab33feda709cb9b850d14170f4#diff-921eedd1a91745e3b4f50c1a58d05286459f1ee95c5aa2f523d3c39d5253faca)
+     
+
+**Fix the condition for metrics existence check.**
+
+The conditional statement `if not hasattr(cfg, ""metrics"") and cfg.metrics:` has a logical error. If `cfg` doesn't have a `metrics` attribute, then `cfg.metrics` will cau"
+FGA-DIKU/BONSAI,issues,230,exclude_regex does not exclude corresponding values if there are values,['🐞minor-bug'],2025-04-05T08:23:18Z,https://github.com/FGA-DIKU/BONSAI/issues/230,"### Description
+When using the exclude regex ex with labs, the lab tokens are removed but not the corresponding values. 
+"
+FGA-DIKU/BONSAI,issues,228,Initializer sends model to device,"['🐞minor-bug', 'effort: small']",2025-04-01T09:04:13Z,https://github.com/FGA-DIKU/BONSAI/issues/228,"We should not send anything to device during initialization, since we might do additional operations on the model.
+Steps:
+In [initializer](https://github.com/FGA-DIKU/EHR/blob/8b976c0342c5bcd53cf4b0a3ad65fa52513acf06/corebehrt/modules/setup/initializer.py) remove all the model.to(device). Optimizer state_dict should still be send to device."
+FGA-DIKU/BONSAI,issues,223,Cannot specify separate path for exposure,"['🚨priority: high', '🐞minor-bug', 'effort: small']",2025-03-27T16:34:41Z,https://github.com/FGA-DIKU/BONSAI/issues/223,Since f93a6578ae9ff910060bfe6d6427c00addb642af we specify outcomes (directory) and filenames exposure and outcome. It assumes that exposure and outcome are placed in the same directory. We should add an exposures directory to be able to specify a separate exposure directory.
+FGA-DIKU/BONSAI,issues,219,Vocab missing if held_out not present,"['🔴bug', '🚨priority: high', 'effort: small']",2025-03-26T10:40:21Z,https://github.com/FGA-DIKU/BONSAI/issues/219,"If we don't have a held_out set, they create_data script does not save the vocab.
+```
+    if os.path.exists(os.path.join(features_path, ""held_out"")):
+        logger.info(""Tokenizing held_out"")
+        load_tokenize_and_save(features_path, tokenizer, tokenized_path, ""held_out"")
+        torch.save(tokenizer.vocabulary, join(tokenized_path, ""vocabulary.pt""))
+        logger.info(""Finished tokenizing"")
+```
+However we should always save the vocab."
+FGA-DIKU/BONSAI,issues,210,Value binning crashes if values=None,"['🔴bug', '🐞minor-bug']",2025-03-24T08:29:26Z,https://github.com/FGA-DIKU/BONSAI/issues/210,"### Description
+If all values are None the value binning fails.
+
+### Expected Behavior
+It should run through and return the original df.
+
+### Actual Behavior
+Error because of missing index
+
+### Logs/Traceback (if applicable)
+```bash
+run_main
+    main(cfg_path)
+  File ""/mnt/azureml/cr/j/1de7c6d47011420a8205764f6fd2b472/exe/wd/corebehrt/main/create_data.py"", line 56, in main_data
+    create_and_save_features(cfg)
+  File ""/mnt/azureml/cr/j/1de7c6d47011420a8205764f6fd2b472/exe/wd/corebehrt/main/help"
+FGA-DIKU/BONSAI,issues,186,Metric Logging,"['🔴bug', '🙋help wanted']",2025-03-13T10:14:03Z,https://github.com/FGA-DIKU/BONSAI/issues/186,"Combined metrics are not logged properly:
+![Image](https://github.com/user-attachments/assets/c1761ad1-bf22-4ea7-9c15-1144f0d0434d)
+Also these metrics are missing from the fold metrics so it's impossible to see the current learning rate
+"
+FGA-DIKU/BONSAI,issues,185,Out of disk memory during censoring,"['🔴bug', '🔍investigation', 'priority: low']",2025-03-12T14:54:23Z,https://github.com/FGA-DIKU/BONSAI/issues/185,"We run out of disk space during censoring in [fine-tune data preparation](https://github.com/FGA-DIKU/EHR/blob/7074691805ff8d6ae0cd633e6cf4a6d66bd2fcdc/corebehrt/modules/preparation/prepare_data.py#L111).
+Additional Information:
+This happens when not further restricting patient group during fine-tuning (no age or gender selection).
+hardware: CPU-20-LP 280 gig of disk space 
+!Update: we are also running out of BigStorageCPU
+My guess is that joblib create too many tmp files. 
+
+We can use a CPU wit"
+FGA-DIKU/BONSAI,issues,183,Convert to numpy for metrics,['🐞minor-bug'],2025-03-12T11:00:57Z,https://github.com/FGA-DIKU/BONSAI/issues/183,"### Description
+I'm not sure whether sklearn.metrics handles torch tensors correctly. It's safer to convert the probas and targets to nympy, in https://github.com/FGA-DIKU/EHR/blame/7074691805ff8d6ae0cd633e6cf4a6d66bd2fcdc/corebehrt/modules/monitoring/metric_aggregation.py#L34
+"
+FGA-DIKU/BONSAI,issues,173,FlashAttention 2 isn't being used,"['🔴bug', '🔍investigation']",2025-03-07T12:01:48Z,https://github.com/FGA-DIKU/BONSAI/issues/173,"Most likely due to `flash-attn` package not being installed - My attempts at installing this didn't work
+
+ImportError: FlashAttention2 has been toggled on, but it cannot be used due to the following error: the package flash_attn seems to be not installed. Please refer to the documentation of https://huggingface.co/docs/transformers/perf_infer_gpu_one#flashattention-2 to install Flash Attention 2.
+"
+FGA-DIKU/BONSAI,issues,170,Code crashes when selecting cv=1,"['🔴bug', '🐞minor-bug']",2025-03-05T17:19:08Z,https://github.com/FGA-DIKU/BONSAI/issues/170,"### Description
+An error occurs if cv_folds is defined as 1 in select_cohort . 
+
+### Logs/Traceback (if applicable)
+  File ""/mnt/azureml/cr/j/2d457d1b309845a3bd196738d922d9e4/exe/wd/corebehrt/functional/features/split.py"", line 154, in create_folds
+    kf = KFold(n_splits=num_folds, shuffle=True, random_state=seed)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/azureml-envs/azureml_d9ffa159a1e5e8b05a29397807dcfc71/lib/python3.12/site-packages/sklearn/model_selection"
+FGA-DIKU/BONSAI,issues,168,"First segment is set to 0, same as padding tokens","['🔴bug', '🚨priority: high', '🐞minor-bug', 'breaking changes']",2025-03-05T11:04:12Z,https://github.com/FGA-DIKU/BONSAI/issues/168,"In the old code we do `factorize + 1`
+https://github.com/mikkelfo/CORE-BEHRT/blob/7cf32d8dcec801a5d6bfdad055ae79aa36a401cf/ehr2vec/data/creators.py#L57
+
+The new code has dropped the + 1 at some point, which makes the `segment=0` for padding tokens equal to the first segments
+https://github.com/FGA-DIKU/EHR/blob/b51021e1a41cc56b420c7bee8e6d1e13eacac173/corebehrt/functional/features/normalize.py#L39
+"
+FGA-DIKU/BONSAI,issues,164,attention_mask is getting set as `torch.ones`,"['🔴bug', '🚨priority: high', 'status: blocked']",2025-03-05T09:35:50Z,https://github.com/FGA-DIKU/BONSAI/issues/164,"Currently, we pass in an attention_mask that includes padding https://github.com/FGA-DIKU/EHR/blob/cceb21611e1a001ea3278c4cab2a97fd582b767e/corebehrt/modules/model/model.py#L22 This makes the new ModernBERT unpadding approach unused, which should give a slowdown"
+FGA-DIKU/BONSAI,issues,156,trainer_args.epochs and scheduler.num_training_epochs should align,['🐞minor-bug'],2025-03-03T14:33:51Z,https://github.com/FGA-DIKU/BONSAI/issues/156,"If `trainer_args.epochs` is set to X, but the `scheduler.num_training_epochs` is set to a lower number than X, then we will run epochs with `lr=0` assuming a triangular scheduler
+
+Either we need to raise a warning/exception or we should align the epochs with each other"
+FGA-DIKU/BONSAI,issues,154,Sync issues with azure logging + tqdm postfix conflict,['🔴bug'],2025-02-28T10:07:34Z,https://github.com/FGA-DIKU/BONSAI/pull/154,"Synchronous logging had the GPU hanging, resulting in spiky GPU utilization
+
+Setting tqddm's postfix as train loss ignores the `miniters` and `mininterval` and prints every tqdm update. 
+
+ "
+FGA-DIKU/BONSAI,issues,153,restart_path set if cfg.paths.model has checkpoints,"['🔴bug', '🐞minor-bug']",2025-02-26T10:22:33Z,https://github.com/FGA-DIKU/BONSAI/issues/153,"In `corebehrt/main/pretrain.py` if the `restart_path` is not given, then a check is made in `ModelManager` and if cfg.paths.model has checkpoints, then `restart_path=cfg.paths.model`
+```    
+if not restart_path and ModelManager.check_checkpoints(cfg.paths.model):
+        # No restart path provided, but model @ cfg.paths.model has checkpoints
+        # so we restart from them
+        restart_path = cfg.paths.model
+```
+
+I define this as unexpected behaviour as I've explicitly not set `restart_path"
+FGA-DIKU/BONSAI,issues,149,OOM during feature creation,['🔴bug'],2025-02-19T14:16:19Z,https://github.com/FGA-DIKU/BONSAI/issues/149,"### Description
+We run out of disk space when running create_data with a large enough dataset
+
+### Solution
+Save intermediate result to execute graph
+
+"
+FGA-DIKU/BONSAI,issues,146,Exclusion based on censoring,['🐞minor-bug'],2025-02-18T13:46:56Z,https://github.com/FGA-DIKU/BONSAI/issues/146,"Currently exclusion of prior outcomes is based on the index date. However, it would be more appropriate to based it on the censoring date instead. 
+Otherwise for out of time evaluation we would still include dead patients for test and potentially validation.
+"
+FGA-DIKU/BONSAI,issues,145,Feature loading,['🔴bug'],2025-02-18T13:31:23Z,https://github.com/FGA-DIKU/BONSAI/issues/145,"### Description
+When running feature creation with:
+```
+paths:
+  data: ""azureml:ALL_FORMATTED_DATA_CSV:1""
+  tokenized: ""researcher_data:phair_ehr/data/2024-09-10/mdp_rm_rd/tokenized""
+  features: ""researcher_data:phair_ehr/data/2024-09-10/mdp_rm_rd/features""
+  
+loader:
+  concept_types: [
+    diagnosis,
+    medication,
+    # labtest,
+    procedure,
+    register_medication,
+    register_diagnosis
+  ]
+  # include_values: [labtest]
+```
+The following issue occurs
+```
+The following columns failed to pr"
+FGA-DIKU/BONSAI,issues,144,Create data: specify dtype,['🔴bug'],2025-02-18T12:32:58Z,https://github.com/FGA-DIKU/BONSAI/issues/144,"### Description
+Loading the csv files with dask throws an error:
+
+### Steps to Reproduce
+Run create data on, on azure:
+```
+paths:
+  data: ""azureml:ALL_FORMATTED_DATA_CSV:1""
+  tokenized: ""researcher_data:phair_ehr/data/2024-09-10/mdp_rm_rd/tokenized""
+  features: ""researcher_data:phair_ehr/data/2024-09-10/mdp_rm_rd/features""
+  
+loader:
+  concept_types: [
+    diagnosis,
+    medication,
+    # labtest,
+    procedure,
+    register_medication,
+    register_diagnosis
+  ]
+```
+
+### Logs/Traceback (if appl"
+FGA-DIKU/BONSAI,issues,139,Validation on test,['🐞minor-bug'],2025-02-18T09:55:03Z,https://github.com/FGA-DIKU/BONSAI/issues/139,"Minor bug during validation introduced in the most recent PR ""azure logging""
+```    
+    val_loss, val_metrics = trainer._evaluate(epoch, mode=""test"")
+    # Transform to table for logging in Azure
+    row = {""validation_loss"": val_loss, **val_metrics}
+    log_metrics({f""best.{k}"": v for k, v in row.items()})
+```
+If test set is none, this throws an error:
+```
+line 137, in finetune_fold
+    row = {""validation_loss"": val_loss, **val_metrics}
+TypeError: 'NoneType' object is not a mapping
+```
+
+"
+FGA-DIKU/BONSAI,issues,133,132 fix minor,['🐞minor-bug'],2025-02-14T12:46:40Z,https://github.com/FGA-DIKU/BONSAI/pull/133,
+FGA-DIKU/BONSAI,issues,132,Get splits path does not return,['🐞minor-bug'],2025-02-14T12:34:40Z,https://github.com/FGA-DIKU/BONSAI/issues/132,"https://github.com/FGA-DIKU/EHR/blob/a0cec618a62a72cc7467651246d9cd7bce0ca3bc/corebehrt/main/helper/pretrain.py#L49
+this function does not return the path"
+FGA-DIKU/BONSAI,issues,131,Set default test split to 0,"['🎓good first issue', '🐞minor-bug']",2025-02-14T12:22:24Z,https://github.com/FGA-DIKU/BONSAI/issues/131,"https://github.com/FGA-DIKU/EHR/blob/a0cec618a62a72cc7467651246d9cd7bce0ca3bc/corebehrt/main/finetune_cv.py#L44
+```Traceback (most recent call last):
+  File ""C:\Users\fjn197\PhD\projects\PHAIR\pipelines\PHAIR_EHR\corebehrt\main\finetune_cv.py"", line 88, in <module>
+    main_finetune(args.config_path)
+  File ""C:\Users\fjn197\PhD\projects\PHAIR\pipelines\PHAIR_EHR\corebehrt\main\finetune_cv.py"", line 46, in main_finetune      
+    test_pids, train_val_pids = split_into_test_and_train_val_pids(
+   "
+FGA-DIKU/BONSAI,issues,123,Bug when normalising values,['🔴bug'],2025-02-07T13:48:19Z,https://github.com/FGA-DIKU/BONSAI/issues/123,"Currently a bug when normalising values. 
+Solution could be so import Mikkels normalisation scheme, and only make binned normalisation available. "
+FGA-DIKU/BONSAI,issues,118,"Out of memory when running pre-training on all data inputs (m,d,p,lv)","['🔴bug', '🚨priority: high']",2025-02-06T13:21:33Z,https://github.com/FGA-DIKU/BONSAI/issues/118,"When running the pre-training script on a data asset with the data inputs medication, diagnosis, procedures, and labs + values, we run out of memory when converting the data to patient list. 
+Can be replicated when running on the data asset 
+  features: ""azureml:OLD_BC_features:1""
+  tokenized: ""azureml:OLD_BC_tokenized:1"""
+FGA-DIKU/BONSAI,issues,117,Failing unittest,"['🔴bug', '🙋help wanted', '🚨priority: high']",2025-02-06T13:10:45Z,https://github.com/FGA-DIKU/BONSAI/issues/117,"There are more unittests that are skipped, but are failing.
+E.g. when run via `python -m unittest discover -s tests\test_modules`"
+FGA-DIKU/BONSAI,issues,78,The unittest in the workflow misses numerous tests,"['🔴bug', '🙋help wanted', '🚨priority: high']",2025-01-10T13:09:27Z,https://github.com/FGA-DIKU/BONSAI/issues/78,"Not all tests are discovered by unittests. Switch to pytest, or make sure all tests are discovered.
+Currently the source of this is unclear. We are following all the naming conventions unittest expects."
+FGA-DIKU/BONSAI,issues,77,Data creation out of disk,"['🔴bug', '🚨priority: high']",2025-01-08T14:09:12Z,https://github.com/FGA-DIKU/BONSAI/issues/77,"When running data creatipn on med, diag, lab and proc we run out of disk space.
+```
+Disk full while running job. Please consider reducing amount of data accessed, or upgrading VM SKU. Total space: 402073 MB, available space: 7781 MB (under AZ_BATCH_NODE_ROOT_DIR).
+```
+Works with med and diag.
+
+Potential fix might be to keep background and death separated from concepts until the very end and process them as pandas dataframe."
+FGA-DIKU/BONSAI,issues,67,Environment: Specify python version as <3.13,['🔴bug'],2024-11-28T13:28:46Z,https://github.com/FGA-DIKU/BONSAI/issues/67,"There are compatibility issues of python 3.13 and torch.save
+see [this issue](https://github.com/python/cpython/issues/125631)"
+FGA-DIKU/BONSAI,issues,57,Bug in short sequence exclusion ,"['🔴bug', '🚨priority: high']",2024-11-17T14:21:29Z,https://github.com/FGA-DIKU/BONSAI/issues/57,The function `exclude_short_sequences_dask` when called on a desk dataframe excludes too many patients. For instance the patient 24aac770-cb71-814b-798a-238f47bf979b in our example data is excluded from the features even though it has many events.
+FGA-DIKU/BONSAI,issues,43,Targets are not saved correctly when using numpy.savez_compressed ,['🔴bug'],2024-10-19T12:02:58Z,https://github.com/FGA-DIKU/BONSAI/issues/43,  https://github.com/FGA-DIKU/EHR/blob/5f0a18aca2e86b2a0b8f04634ce105da27db608f/corebehrt/trainer/utils.py#L43
+FreedomIntelligence/AceGPT,issues,11,AceGpt,[],2024-03-08T15:13:52Z,https://github.com/FreedomIntelligence/AceGPT/issues/11,"Hi.
+i have a issue in loading the model which is cause this error:
+WARNING:auto_gptq.nn_modules.fused_llama_mlp:skip module injection for FusedLlamaMLPForQuantizedModel not support integrate without triton yet.
+---------------------------------------------------------------------------
+RuntimeError                              Traceback (most recent call last)
+[<ipython-input-4-b748d3409d8f>](https://localhost:8080/#) in <cell line: 1>()
+----> 1 model = AutoGPTQForCausalLM.from_quantized(m"
+FreedomIntelligence/Awesome-AI4Med,issues,2,digital-copyright,[],2022-04-01T08:55:53Z,https://github.com/FreedomIntelligence/Awesome-AI4Med/pull/2,"Hi lrs1353281004!👋, I added this optional feature to digitally sign you source-code and track it on a blockchain node should you ever be audited or experience a software supply-chain attack. Simply compare the byte encrypted signature on your .git binary with the hash written to your immutable blockchain node. If they ever differ you should escalate. See the lrs1353281004-digital-copyright for complete instructions on accessing your hash.. Feel free to contact me directly to review any questions"
+Google-Health/cxr-foundation,issues,26,Bump pyasn1 from 0.6.1 to 0.6.2 in /python/clientside,"['dependencies', 'python']",2026-01-16T19:28:59Z,https://github.com/Google-Health/cxr-foundation/pull/26,"Bumps [pyasn1](https://github.com/pyasn1/pyasn1) from 0.6.1 to 0.6.2.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pyasn1/pyasn1/releases"">pyasn1's releases</a>.</em></p>
+<blockquote>
+<h2>Release 0.6.2</h2>
+<p>It's a minor release.</p>
+<ul>
+<li>Fixed continuation octet limits in OID/RELATIVE-OID decoder (CVE-2026-23490).</li>
+<li>Added support for Python 3.14.</li>
+<li>Added SECURITY.md policy.</li>
+<li>Migrated to pyproject.toml packaging.</li>
+</ul"
+Google-Health/cxr-foundation,issues,24,Bump filelock from 3.17.0 to 3.20.3 in /python/clientside,"['dependencies', 'python']",2026-01-13T20:33:13Z,https://github.com/Google-Health/cxr-foundation/pull/24,"Bumps [filelock](https://github.com/tox-dev/py-filelock) from 3.17.0 to 3.20.3.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/tox-dev/py-filelock/releases"">filelock's releases</a>.</em></p>
+<blockquote>
+<h2>3.20.3</h2>
+<!-- raw HTML omitted -->
+<h2>What's Changed</h2>
+<ul>
+<li>Fix TOCTOU symlink vulnerability in SoftFileLock by <a href=""https://github.com/gaborbernat""><code>@​gaborbernat</code></a> in <a href=""https://redirect.github.com/tox-dev/filel"
+Google-Health/cxr-foundation,issues,23,Bump werkzeug from 3.1.3 to 3.1.5 in /python/serving,"['dependencies', 'python']",2026-01-09T00:19:27Z,https://github.com/Google-Health/cxr-foundation/pull/23,"Bumps [werkzeug](https://github.com/pallets/werkzeug) from 3.1.3 to 3.1.5.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pallets/werkzeug/releases"">werkzeug's releases</a>.</em></p>
+<blockquote>
+<h2>3.1.5</h2>
+<p>This is the Werkzeug 3.1.5 security fix release, which fixes security issues and bugs but does not otherwise change behavior and should not result in breaking changes compared to the latest feature release.</p>
+<p>PyPI: <a href=""https://pypi."
+Google-Health/cxr-foundation,issues,22,Bump werkzeug from 3.1.3 to 3.1.5 in /python/clientside,"['dependencies', 'python']",2026-01-09T00:17:04Z,https://github.com/Google-Health/cxr-foundation/pull/22,"Bumps [werkzeug](https://github.com/pallets/werkzeug) from 3.1.3 to 3.1.5.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pallets/werkzeug/releases"">werkzeug's releases</a>.</em></p>
+<blockquote>
+<h2>3.1.5</h2>
+<p>This is the Werkzeug 3.1.5 security fix release, which fixes security issues and bugs but does not otherwise change behavior and should not result in breaking changes compared to the latest feature release.</p>
+<p>PyPI: <a href=""https://pypi."
+Google-Health/cxr-foundation,issues,20,Bump filelock from 3.17.0 to 3.20.1 in /python/clientside,"['dependencies', 'python']",2025-12-16T22:35:24Z,https://github.com/Google-Health/cxr-foundation/pull/20,"Bumps [filelock](https://github.com/tox-dev/py-filelock) from 3.17.0 to 3.20.1.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/tox-dev/py-filelock/releases"">filelock's releases</a>.</em></p>
+<blockquote>
+<h2>3.20.1</h2>
+<!-- raw HTML omitted -->
+<h2>What's Changed</h2>
+<ul>
+<li>CVE-2025-68146: Fix TOCTOU symlink vulnerability in lock file creation by <a href=""https://github.com/gaborbernat""><code>@​gaborbernat</code></a> in <a href=""https://redirect.gi"
+Google-Health/cxr-foundation,issues,10,Bump requests from 2.32.3 to 2.32.4 in /python/clientside,"['dependencies', 'python']",2025-06-10T10:40:09Z,https://github.com/Google-Health/cxr-foundation/pull/10,"Bumps [requests](https://github.com/psf/requests) from 2.32.3 to 2.32.4.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/psf/requests/releases"">requests's releases</a>.</em></p>
+<blockquote>
+<h2>v2.32.4</h2>
+<h2>2.32.4 (2025-06-10)</h2>
+<p><strong>Security</strong></p>
+<ul>
+<li>CVE-2024-47081 Fixed an issue where a maliciously crafted URL and trusted
+environment will retrieve credentials for the wrong hostname/machine from a
+netrc file. (<a href=""https:"
+Google-Health/cxr-foundation,issues,9,Bump jinja2 from 3.1.5 to 3.1.6 in /python/serving,"['dependencies', 'python']",2025-06-07T07:14:33Z,https://github.com/Google-Health/cxr-foundation/pull/9,"Bumps [jinja2](https://github.com/pallets/jinja) from 3.1.5 to 3.1.6.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pallets/jinja/releases"">jinja2's releases</a>.</em></p>
+<blockquote>
+<h2>3.1.6</h2>
+<p>This is the Jinja 3.1.6 security release, which fixes security issues but does not otherwise change behavior and should not result in breaking changes compared to the latest feature release.</p>
+<p>PyPI: <a href=""https://pypi.org/project/Jinja2/3.1.6/"""
+Google-Health/cxr-foundation,issues,1,Bump jinja2 from 3.1.4 to 3.1.5 in /python/serving,['dependencies'],2025-01-10T22:08:22Z,https://github.com/Google-Health/cxr-foundation/pull/1,"Bumps [jinja2](https://github.com/pallets/jinja) from 3.1.4 to 3.1.5.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pallets/jinja/releases"">jinja2's releases</a>.</em></p>
+<blockquote>
+<h2>3.1.5</h2>
+<p>This is the Jinja 3.1.5 security fix release, which fixes security issues and bugs but does not otherwise change behavior and should not result in breaking changes compared to the latest feature release.</p>
+<p>PyPI: <a href=""https://pypi.org/project/J"
+Google-Health/derm-foundation,issues,19,Bump pyasn1 from 0.6.1 to 0.6.2 in /python/serving,"['dependencies', 'python']",2026-01-16T19:28:59Z,https://github.com/Google-Health/derm-foundation/pull/19,"Bumps [pyasn1](https://github.com/pyasn1/pyasn1) from 0.6.1 to 0.6.2.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pyasn1/pyasn1/releases"">pyasn1's releases</a>.</em></p>
+<blockquote>
+<h2>Release 0.6.2</h2>
+<p>It's a minor release.</p>
+<ul>
+<li>Fixed continuation octet limits in OID/RELATIVE-OID decoder (CVE-2026-23490).</li>
+<li>Added support for Python 3.14.</li>
+<li>Added SECURITY.md policy.</li>
+<li>Migrated to pyproject.toml packaging.</li>
+</ul"
+Google-Health/derm-foundation,issues,17,Bump werkzeug from 3.1.3 to 3.1.5 in /python/serving,"['dependencies', 'python']",2026-01-09T00:39:14Z,https://github.com/Google-Health/derm-foundation/pull/17,"Bumps [werkzeug](https://github.com/pallets/werkzeug) from 3.1.3 to 3.1.5.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pallets/werkzeug/releases"">werkzeug's releases</a>.</em></p>
+<blockquote>
+<h2>3.1.5</h2>
+<p>This is the Werkzeug 3.1.5 security fix release, which fixes security issues and bugs but does not otherwise change behavior and should not result in breaking changes compared to the latest feature release.</p>
+<p>PyPI: <a href=""https://pypi."
+Google-Health/derm-foundation,issues,8,Bump requests from 2.32.3 to 2.32.4 in /python/serving,"['dependencies', 'python']",2025-06-10T10:40:08Z,https://github.com/Google-Health/derm-foundation/pull/8,"Bumps [requests](https://github.com/psf/requests) from 2.32.3 to 2.32.4.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/psf/requests/releases"">requests's releases</a>.</em></p>
+<blockquote>
+<h2>v2.32.4</h2>
+<h2>2.32.4 (2025-06-10)</h2>
+<p><strong>Security</strong></p>
+<ul>
+<li>CVE-2024-47081 Fixed an issue where a maliciously crafted URL and trusted
+environment will retrieve credentials for the wrong hostname/machine from a
+netrc file. (<a href=""https:"
+Google-Health/derm-foundation,issues,3,Bump jinja2 from 3.1.5 to 3.1.6 in /python/serving,"['dependencies', 'python']",2025-03-06T05:09:17Z,https://github.com/Google-Health/derm-foundation/pull/3,"Bumps [jinja2](https://github.com/pallets/jinja) from 3.1.5 to 3.1.6.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pallets/jinja/releases"">jinja2's releases</a>.</em></p>
+<blockquote>
+<h2>3.1.6</h2>
+<p>This is the Jinja 3.1.6 security release, which fixes security issues but does not otherwise change behavior and should not result in breaking changes compared to the latest feature release.</p>
+<p>PyPI: <a href=""https://pypi.org/project/Jinja2/3.1.6/"""
+Google-Health/derm-foundation,issues,1,Bump jinja2 from 3.1.4 to 3.1.5 in /python/serving,['dependencies'],2025-01-10T22:06:24Z,https://github.com/Google-Health/derm-foundation/pull/1,"Bumps [jinja2](https://github.com/pallets/jinja) from 3.1.4 to 3.1.5.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pallets/jinja/releases"">jinja2's releases</a>.</em></p>
+<blockquote>
+<h2>3.1.5</h2>
+<p>This is the Jinja 3.1.5 security fix release, which fixes security issues and bugs but does not otherwise change behavior and should not result in breaking changes compared to the latest feature release.</p>
+<p>PyPI: <a href=""https://pypi.org/project/J"
+Google-Health/hear,issues,16,Critical: AttributeError in hear_demo.ipynb (Missing api_utils.py & Dependency Confusion Risk),[],2026-01-22T12:00:00Z,https://github.com/Google-Health/hear/issues/16,"Hi Google Health Team, @tthelin @tiffc @mahvar @sterlinb 
+
+I am reporting a **critical functional bug** in the **hear_demo.ipynb** notebook. This issue prevents developers from running the HeAR API demo and introduces a potential Dependency Confusion security risk.
+
+### The Problem
+
+- Missing File: The notebook references an api_utils module (specifically api_utils.make_prediction) which is missing from the repository.
+
+- Naming Collision: The instruction pip install api_utils installs an unrela"
+Google-Health/hear,issues,15,Bump pyasn1 from 0.6.1 to 0.6.2 in /python/serving,"['dependencies', 'python']",2026-01-16T19:34:06Z,https://github.com/Google-Health/hear/pull/15,"Bumps [pyasn1](https://github.com/pyasn1/pyasn1) from 0.6.1 to 0.6.2.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pyasn1/pyasn1/releases"">pyasn1's releases</a>.</em></p>
+<blockquote>
+<h2>Release 0.6.2</h2>
+<p>It's a minor release.</p>
+<ul>
+<li>Fixed continuation octet limits in OID/RELATIVE-OID decoder (CVE-2026-23490).</li>
+<li>Added support for Python 3.14.</li>
+<li>Added SECURITY.md policy.</li>
+<li>Migrated to pyproject.toml packaging.</li>
+</ul"
+Google-Health/hear,issues,13,Bump werkzeug from 3.1.3 to 3.1.5 in /python/serving,"['dependencies', 'python']",2026-01-09T00:22:02Z,https://github.com/Google-Health/hear/pull/13,"Bumps [werkzeug](https://github.com/pallets/werkzeug) from 3.1.3 to 3.1.5.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pallets/werkzeug/releases"">werkzeug's releases</a>.</em></p>
+<blockquote>
+<h2>3.1.5</h2>
+<p>This is the Werkzeug 3.1.5 security fix release, which fixes security issues and bugs but does not otherwise change behavior and should not result in breaking changes compared to the latest feature release.</p>
+<p>PyPI: <a href=""https://pypi."
+Google-Health/hear,issues,4,Bump requests from 2.32.3 to 2.32.4 in /python/serving,"['dependencies', 'python']",2025-06-10T11:33:52Z,https://github.com/Google-Health/hear/pull/4,"Bumps [requests](https://github.com/psf/requests) from 2.32.3 to 2.32.4.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/psf/requests/releases"">requests's releases</a>.</em></p>
+<blockquote>
+<h2>v2.32.4</h2>
+<h2>2.32.4 (2025-06-10)</h2>
+<p><strong>Security</strong></p>
+<ul>
+<li>CVE-2024-47081 Fixed an issue where a maliciously crafted URL and trusted
+environment will retrieve credentials for the wrong hostname/machine from a
+netrc file. (<a href=""https:"
+Google-Health/hear,issues,2,Bump jinja2 from 3.1.5 to 3.1.6 in /python/serving,"['dependencies', 'python']",2025-03-25T02:07:37Z,https://github.com/Google-Health/hear/pull/2,"Bumps [jinja2](https://github.com/pallets/jinja) from 3.1.5 to 3.1.6.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pallets/jinja/releases"">jinja2's releases</a>.</em></p>
+<blockquote>
+<h2>3.1.6</h2>
+<p>This is the Jinja 3.1.6 security release, which fixes security issues but does not otherwise change behavior and should not result in breaking changes compared to the latest feature release.</p>
+<p>PyPI: <a href=""https://pypi.org/project/Jinja2/3.1.6/"""
+Google-Health/medasr,issues,7,Bump pyasn1 from 0.6.1 to 0.6.2 in /python/serving,"['dependencies', 'python']",2026-01-16T20:01:57Z,https://github.com/Google-Health/medasr/pull/7,"Bumps [pyasn1](https://github.com/pyasn1/pyasn1) from 0.6.1 to 0.6.2.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pyasn1/pyasn1/releases"">pyasn1's releases</a>.</em></p>
+<blockquote>
+<h2>Release 0.6.2</h2>
+<p>It's a minor release.</p>
+<ul>
+<li>Fixed continuation octet limits in OID/RELATIVE-OID decoder (CVE-2026-23490).</li>
+<li>Added support for Python 3.14.</li>
+<li>Added SECURITY.md policy.</li>
+<li>Migrated to pyproject.toml packaging.</li>
+</ul"
+Google-Health/medasr,issues,5,Bump filelock from 3.20.0 to 3.20.3 in /python/serving,"['dependencies', 'python']",2026-01-13T21:03:49Z,https://github.com/Google-Health/medasr/pull/5,"Bumps [filelock](https://github.com/tox-dev/py-filelock) from 3.20.0 to 3.20.3.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/tox-dev/py-filelock/releases"">filelock's releases</a>.</em></p>
+<blockquote>
+<h2>3.20.3</h2>
+<!-- raw HTML omitted -->
+<h2>What's Changed</h2>
+<ul>
+<li>Fix TOCTOU symlink vulnerability in SoftFileLock by <a href=""https://github.com/gaborbernat""><code>@​gaborbernat</code></a> in <a href=""https://redirect.github.com/tox-dev/filel"
+Google-Health/medasr,issues,4,Bump werkzeug from 3.1.4 to 3.1.5 in /python/serving,"['dependencies', 'python']",2026-01-09T01:13:40Z,https://github.com/Google-Health/medasr/pull/4,"Bumps [werkzeug](https://github.com/pallets/werkzeug) from 3.1.4 to 3.1.5.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pallets/werkzeug/releases"">werkzeug's releases</a>.</em></p>
+<blockquote>
+<h2>3.1.5</h2>
+<p>This is the Werkzeug 3.1.5 security fix release, which fixes security issues and bugs but does not otherwise change behavior and should not result in breaking changes compared to the latest feature release.</p>
+<p>PyPI: <a href=""https://pypi."
+Google-Health/medasr,issues,2,Bump filelock from 3.20.0 to 3.20.1 in /python/serving,"['dependencies', 'python']",2025-12-19T18:02:31Z,https://github.com/Google-Health/medasr/pull/2,"Bumps [filelock](https://github.com/tox-dev/py-filelock) from 3.20.0 to 3.20.1.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/tox-dev/py-filelock/releases"">filelock's releases</a>.</em></p>
+<blockquote>
+<h2>3.20.1</h2>
+<!-- raw HTML omitted -->
+<h2>What's Changed</h2>
+<ul>
+<li>CVE-2025-68146: Fix TOCTOU symlink vulnerability in lock file creation by <a href=""https://github.com/gaborbernat""><code>@​gaborbernat</code></a> in <a href=""https://redirect.gi"
+Google-Health/medgemma,issues,46,Bump pyasn1 from 0.6.1 to 0.6.2 in /python/serving,"['dependencies', 'python']",2026-01-16T19:55:31Z,https://github.com/Google-Health/medgemma/pull/46,"Bumps [pyasn1](https://github.com/pyasn1/pyasn1) from 0.6.1 to 0.6.2.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pyasn1/pyasn1/releases"">pyasn1's releases</a>.</em></p>
+<blockquote>
+<h2>Release 0.6.2</h2>
+<p>It's a minor release.</p>
+<ul>
+<li>Fixed continuation octet limits in OID/RELATIVE-OID decoder (CVE-2026-23490).</li>
+<li>Added support for Python 3.14.</li>
+<li>Added SECURITY.md policy.</li>
+<li>Migrated to pyproject.toml packaging.</li>
+</ul"
+Google-Health/medgemma,issues,45,Bump filelock from 3.20.0 to 3.20.3 in /python/serving,"['dependencies', 'python']",2026-01-13T20:59:12Z,https://github.com/Google-Health/medgemma/pull/45,"Bumps [filelock](https://github.com/tox-dev/py-filelock) from 3.20.0 to 3.20.3.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/tox-dev/py-filelock/releases"">filelock's releases</a>.</em></p>
+<blockquote>
+<h2>3.20.3</h2>
+<!-- raw HTML omitted -->
+<h2>What's Changed</h2>
+<ul>
+<li>Fix TOCTOU symlink vulnerability in SoftFileLock by <a href=""https://github.com/gaborbernat""><code>@​gaborbernat</code></a> in <a href=""https://redirect.github.com/tox-dev/filel"
+Google-Health/medgemma,issues,39,Bump werkzeug from 3.1.4 to 3.1.5 in /python/serving,"['dependencies', 'python']",2026-01-09T00:40:16Z,https://github.com/Google-Health/medgemma/pull/39,"Bumps [werkzeug](https://github.com/pallets/werkzeug) from 3.1.4 to 3.1.5.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pallets/werkzeug/releases"">werkzeug's releases</a>.</em></p>
+<blockquote>
+<h2>3.1.5</h2>
+<p>This is the Werkzeug 3.1.5 security fix release, which fixes security issues and bugs but does not otherwise change behavior and should not result in breaking changes compared to the latest feature release.</p>
+<p>PyPI: <a href=""https://pypi."
+Google-Health/medgemma,issues,36,Bump marshmallow from 3.26.1 to 3.26.2 in /python/serving,"['dependencies', 'python']",2025-12-22T21:11:15Z,https://github.com/Google-Health/medgemma/pull/36,"Bumps [marshmallow](https://github.com/marshmallow-code/marshmallow) from 3.26.1 to 3.26.2.
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/marshmallow-code/marshmallow/blob/3.26.2/CHANGELOG.rst"">marshmallow's changelog</a>.</em></p>
+<blockquote>
+<p>3.26.2 (2025-12-19)
+++++++++++++++++++</p>
+<p>Bug fixes:</p>
+<ul>
+<li>:cve:<code>CVE-2025-68480</code>: Merge error store messages without rebuilding collections.
+Thanks 카푸치노 for reporting and :user:<code>deckar"
+Google-Health/medgemma,issues,34,Bump filelock from 3.20.0 to 3.20.1 in /python/serving,"['dependencies', 'python']",2025-12-16T23:04:05Z,https://github.com/Google-Health/medgemma/pull/34,"Bumps [filelock](https://github.com/tox-dev/py-filelock) from 3.20.0 to 3.20.1.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/tox-dev/py-filelock/releases"">filelock's releases</a>.</em></p>
+<blockquote>
+<h2>3.20.1</h2>
+<!-- raw HTML omitted -->
+<h2>What's Changed</h2>
+<ul>
+<li>CVE-2025-68146: Fix TOCTOU symlink vulnerability in lock file creation by <a href=""https://github.com/gaborbernat""><code>@​gaborbernat</code></a> in <a href=""https://redirect.gi"
+Google-Health/medgemma,issues,29,Inputted data privacy,[],2025-11-10T17:07:08Z,https://github.com/Google-Health/medgemma/issues/29,"Dear all,
+I can't seem to find much information about inputted data privacy. If I run the model, either locally or hosted, does Google keep (a copy of) inputted data?
+Best,
+Thymo
+"
+Google-Health/medsiglip,issues,14,Bump pyasn1 from 0.6.1 to 0.6.2 in /python/serving,"['dependencies', 'python']",2026-01-16T19:43:56Z,https://github.com/Google-Health/medsiglip/pull/14,"Bumps [pyasn1](https://github.com/pyasn1/pyasn1) from 0.6.1 to 0.6.2.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pyasn1/pyasn1/releases"">pyasn1's releases</a>.</em></p>
+<blockquote>
+<h2>Release 0.6.2</h2>
+<p>It's a minor release.</p>
+<ul>
+<li>Fixed continuation octet limits in OID/RELATIVE-OID decoder (CVE-2026-23490).</li>
+<li>Added support for Python 3.14.</li>
+<li>Added SECURITY.md policy.</li>
+<li>Migrated to pyproject.toml packaging.</li>
+</ul"
+Google-Health/medsiglip,issues,13,Bump filelock from 3.18.0 to 3.20.3 in /python/serving,"['dependencies', 'python']",2026-01-13T20:49:47Z,https://github.com/Google-Health/medsiglip/pull/13,"Bumps [filelock](https://github.com/tox-dev/py-filelock) from 3.18.0 to 3.20.3.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/tox-dev/py-filelock/releases"">filelock's releases</a>.</em></p>
+<blockquote>
+<h2>3.20.3</h2>
+<!-- raw HTML omitted -->
+<h2>What's Changed</h2>
+<ul>
+<li>Fix TOCTOU symlink vulnerability in SoftFileLock by <a href=""https://github.com/gaborbernat""><code>@​gaborbernat</code></a> in <a href=""https://redirect.github.com/tox-dev/filel"
+Google-Health/medsiglip,issues,12,Bump werkzeug from 3.1.3 to 3.1.5 in /python/serving,"['dependencies', 'python']",2026-01-09T00:54:32Z,https://github.com/Google-Health/medsiglip/pull/12,"Bumps [werkzeug](https://github.com/pallets/werkzeug) from 3.1.3 to 3.1.5.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pallets/werkzeug/releases"">werkzeug's releases</a>.</em></p>
+<blockquote>
+<h2>3.1.5</h2>
+<p>This is the Werkzeug 3.1.5 security fix release, which fixes security issues and bugs but does not otherwise change behavior and should not result in breaking changes compared to the latest feature release.</p>
+<p>PyPI: <a href=""https://pypi."
+Google-Health/medsiglip,issues,10,Bump marshmallow from 3.26.1 to 3.26.2 in /python/serving,"['dependencies', 'python']",2025-12-22T21:09:27Z,https://github.com/Google-Health/medsiglip/pull/10,"Bumps [marshmallow](https://github.com/marshmallow-code/marshmallow) from 3.26.1 to 3.26.2.
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/marshmallow-code/marshmallow/blob/3.26.2/CHANGELOG.rst"">marshmallow's changelog</a>.</em></p>
+<blockquote>
+<p>3.26.2 (2025-12-19)
+++++++++++++++++++</p>
+<p>Bug fixes:</p>
+<ul>
+<li>:cve:<code>CVE-2025-68480</code>: Merge error store messages without rebuilding collections.
+Thanks 카푸치노 for reporting and :user:<code>deckar"
+Google-Health/medsiglip,issues,9,Bump filelock from 3.18.0 to 3.20.1 in /python/serving,"['dependencies', 'python']",2025-12-16T22:51:30Z,https://github.com/Google-Health/medsiglip/pull/9,"Bumps [filelock](https://github.com/tox-dev/py-filelock) from 3.18.0 to 3.20.1.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/tox-dev/py-filelock/releases"">filelock's releases</a>.</em></p>
+<blockquote>
+<h2>3.20.1</h2>
+<!-- raw HTML omitted -->
+<h2>What's Changed</h2>
+<ul>
+<li>CVE-2025-68146: Fix TOCTOU symlink vulnerability in lock file creation by <a href=""https://github.com/gaborbernat""><code>@​gaborbernat</code></a> in <a href=""https://redirect.gi"
+Google-Health/path-foundation,issues,21,Bump pyasn1 from 0.6.1 to 0.6.2 in /python/serving,"['dependencies', 'python']",2026-01-16T19:29:13Z,https://github.com/Google-Health/path-foundation/pull/21,"Bumps [pyasn1](https://github.com/pyasn1/pyasn1) from 0.6.1 to 0.6.2.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pyasn1/pyasn1/releases"">pyasn1's releases</a>.</em></p>
+<blockquote>
+<h2>Release 0.6.2</h2>
+<p>It's a minor release.</p>
+<ul>
+<li>Fixed continuation octet limits in OID/RELATIVE-OID decoder (CVE-2026-23490).</li>
+<li>Added support for Python 3.14.</li>
+<li>Added SECURITY.md policy.</li>
+<li>Migrated to pyproject.toml packaging.</li>
+</ul"
+Google-Health/path-foundation,issues,19,Bump werkzeug from 3.1.3 to 3.1.5 in /python/serving,"['dependencies', 'python']",2026-01-09T00:13:18Z,https://github.com/Google-Health/path-foundation/pull/19,"Bumps [werkzeug](https://github.com/pallets/werkzeug) from 3.1.3 to 3.1.5.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pallets/werkzeug/releases"">werkzeug's releases</a>.</em></p>
+<blockquote>
+<h2>3.1.5</h2>
+<p>This is the Werkzeug 3.1.5 security fix release, which fixes security issues and bugs but does not otherwise change behavior and should not result in breaking changes compared to the latest feature release.</p>
+<p>PyPI: <a href=""https://pypi."
+Google-Health/path-foundation,issues,17,Bump marshmallow from 3.26.1 to 3.26.2 in /python/serving,"['dependencies', 'python']",2025-12-22T21:04:44Z,https://github.com/Google-Health/path-foundation/pull/17,"Bumps [marshmallow](https://github.com/marshmallow-code/marshmallow) from 3.26.1 to 3.26.2.
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/marshmallow-code/marshmallow/blob/3.26.2/CHANGELOG.rst"">marshmallow's changelog</a>.</em></p>
+<blockquote>
+<p>3.26.2 (2025-12-19)
+++++++++++++++++++</p>
+<p>Bug fixes:</p>
+<ul>
+<li>:cve:<code>CVE-2025-68480</code>: Merge error store messages without rebuilding collections.
+Thanks 카푸치노 for reporting and :user:<code>deckar"
+Google-Health/path-foundation,issues,9,Bump requests from 2.32.3 to 2.32.4 in /python/serving,"['dependencies', 'python']",2025-06-10T10:40:14Z,https://github.com/Google-Health/path-foundation/pull/9,"Bumps [requests](https://github.com/psf/requests) from 2.32.3 to 2.32.4.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/psf/requests/releases"">requests's releases</a>.</em></p>
+<blockquote>
+<h2>v2.32.4</h2>
+<h2>2.32.4 (2025-06-10)</h2>
+<p><strong>Security</strong></p>
+<ul>
+<li>CVE-2024-47081 Fixed an issue where a maliciously crafted URL and trusted
+environment will retrieve credentials for the wrong hostname/machine from a
+netrc file. (<a href=""https:"
+Google-Health/path-foundation,issues,5,Bump jinja2 from 3.1.5 to 3.1.6 in /python/serving,"['dependencies', 'python']",2025-03-06T05:00:02Z,https://github.com/Google-Health/path-foundation/pull/5,"Bumps [jinja2](https://github.com/pallets/jinja) from 3.1.5 to 3.1.6.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pallets/jinja/releases"">jinja2's releases</a>.</em></p>
+<blockquote>
+<h2>3.1.6</h2>
+<p>This is the Jinja 3.1.6 security release, which fixes security issues but does not otherwise change behavior and should not result in breaking changes compared to the latest feature release.</p>
+<p>PyPI: <a href=""https://pypi.org/project/Jinja2/3.1.6/"""
+Google-Health/path-foundation,issues,3,Bump jinja2 from 3.1.4 to 3.1.5 in /python/serving,['dependencies'],2025-01-10T21:58:58Z,https://github.com/Google-Health/path-foundation/pull/3,"Bumps [jinja2](https://github.com/pallets/jinja) from 3.1.4 to 3.1.5.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pallets/jinja/releases"">jinja2's releases</a>.</em></p>
+<blockquote>
+<h2>3.1.5</h2>
+<p>This is the Jinja 3.1.5 security fix release, which fixes security issues and bugs but does not otherwise change behavior and should not result in breaking changes compared to the latest feature release.</p>
+<p>PyPI: <a href=""https://pypi.org/project/J"
+JustGoingViral/Neural-Epigenetic-Cancer-Intelligence-Platform,issues,24,[WIP] Continue improving app features for deployment,[],2025-12-08T02:18:35Z,https://github.com/JustGoingViral/Neural-Epigenetic-Cancer-Intelligence-Platform/pull/24,"## 🎉 Production Deployment v1.0 - Complete & Ready! ✅
+
+The Neural Epigenetic Cancer Intelligence Platform is now **fully production-ready** with comprehensive deployment infrastructure, enterprise-grade security, and complete automation.
+
+### 📦 Final Deliverables Summary
+
+**Total Files Added/Modified:** 28 files
+- **Infrastructure:** 13 files (Docker, Kubernetes, Nginx)
+- **Automation:** 4 files (deployment, backup, CI/CD)
+- **Documentation:** 5 files (20k+ words)
+- **Configuration:** 2 files (e"
+JustGoingViral/Neural-Epigenetic-Cancer-Intelligence-Platform,issues,23,Complete codebase audit with honest documentation and implementation roadmap,[],2025-12-08T01:44:35Z,https://github.com/JustGoingViral/Neural-Epigenetic-Cancer-Intelligence-Platform/pull/23,"Conducted comprehensive technical audit of the Neural Epigenetic Cancer Intelligence Platform. Current status: Pre-Alpha (30% to v0.1.0, 20% to v1.0.0). Repository contains solid architectural foundation but critical gaps in security, testing, and production readiness.
+
+## Documentation Created
+
+**AUDIT_RESULTS.md** (477 lines)
+- Functionality analysis: 6 implemented core systems, 3 partially implemented, 7 not implemented
+- Technical audit: 8 critical security issues, <20% actual test coverage "
+JustGoingViral/Neural-Epigenetic-Cancer-Intelligence-Platform,issues,21,Add external data pipelines and risk visualization toggle,['codex'],2025-09-12T21:27:25Z,https://github.com/JustGoingViral/Neural-Epigenetic-Cancer-Intelligence-Platform/pull/21,"## Summary
+- add SPARK Autism and CDC Environmental Tracking ingestion pipelines with scheduling helpers
+- expose de-identified aggregate stats via `/open-data`
+- add UI toggle to view genetics, exposure, or combined risk
+- support environment settings and security stubs for tests
+
+## Testing
+- `ENVIRONMENT=test DATABASE_TEST_URL=sqlite:///./test.db pytest tests/test_risk_calculator.py -q` *(fails: AttributeError: 'list' object has no attribute 'lower')*
+
+------
+https://chatgpt.com/codex/tasks/t"
+JustGoingViral/Neural-Epigenetic-Cancer-Intelligence-Platform,issues,19,feat: add risk factor toggle,['codex'],2025-09-12T21:27:24Z,https://github.com/JustGoingViral/Neural-Epigenetic-Cancer-Intelligence-Platform/pull/19,"## Summary
+- expose genetic and exposure risk scores in questionnaire results
+- add frontend toggle to view genetic, exposure, or combined risk scores
+- add placeholder security helpers and config defaults for tests
+
+## Testing
+- `pytest` *(fails: non-body parameters must be in path, query, header or cookie)*
+- `npm test` *(fails: No tests found)*
+
+------
+https://chatgpt.com/codex/tasks/task_e_68c48a5f81088328872b607ba1a12fd5"
+JustGoingViral/Neural-Epigenetic-Cancer-Intelligence-Platform,issues,16,Add security helper functions and update imports,['codex'],2025-08-21T08:17:48Z,https://github.com/JustGoingViral/Neural-Epigenetic-Cancer-Intelligence-Platform/pull/16,"## Summary
+- add utility functions for password hashing and token creation in security core
+- update auth module imports to use new helpers
+
+## Testing
+- `python -m py_compile backend/app/core/security.py backend/app/api/v1/auth.py backend/app/db/init_db.py`
+
+
+------
+https://chatgpt.com/codex/tasks/task_e_68964ebe9c088328912b603143014861"
+JustGoingViral/Neural-Epigenetic-Cancer-Intelligence-Platform,issues,12,refactor: update pydantic settings config,['codex'],2025-08-09T03:38:03Z,https://github.com/JustGoingViral/Neural-Epigenetic-Cancer-Intelligence-Platform/pull/12,"## Summary
+- replace deprecated Config inner class with `model_config` using `SettingsConfigDict`
+- update BaseSettings import to new pydantic-settings style and expose module-level `settings` instance
+
+## Testing
+- `pytest` *(fails: cannot import name 'get_current_user' from 'app.core.security'; No module named 'psycopg2')*
+- `python - <<'PY' ...`
+
+------
+https://chatgpt.com/codex/tasks/task_e_68964ec1a0b883289af7224c4e31f359"
+JustGoingViral/Neural-Epigenetic-Cancer-Intelligence-Platform,issues,8,Add security helper functions and update imports,['codex'],2025-08-09T03:37:09Z,https://github.com/JustGoingViral/Neural-Epigenetic-Cancer-Intelligence-Platform/pull/8,"## Summary
+- add utility functions for password hashing and token creation in security core
+- update auth module imports to use new helpers
+
+## Testing
+- `python -m py_compile backend/app/core/security.py backend/app/api/v1/auth.py backend/app/db/init_db.py`
+
+
+------
+https://chatgpt.com/codex/tasks/task_e_68964ebe9c088328912b603143014861"
+JustGoingViral/Neural-Epigenetic-Cancer-Intelligence-Platform,issues,5,Expose security helper functions and settings,['codex'],2025-08-09T03:36:11Z,https://github.com/JustGoingViral/Neural-Epigenetic-Cancer-Intelligence-Platform/pull/5,"## Summary
+- add top-level security helpers for password hashing, token creation, and user retrieval
+- expose current-user role checks for clinician and researcher access
+- provide a module-level `settings` instance in configuration
+
+## Testing
+- `pytest` *(fails: AssertionError: non-body parameters must be in path, query, header or cookie: risk_score)*
+
+------
+https://chatgpt.com/codex/tasks/task_e_68964e206cb48328b35ef55483453268"
+Keeper888/privacyguardian,issues,13,Add 'Access Vault' button to GUI,[],2026-01-02T15:34:14Z,https://github.com/Keeper888/privacyguardian/issues/13,"## Feature Request
+
+Add a button in the GUI dashboard to access and view stored tokens/PII mappings.
+
+## Problem
+
+When PrivacyGuardian tokenizes sensitive data (like passwords), users need a way to retrieve the original values. Currently there's no GUI way to look up what a token like `◈PG:PASS_fa3ea86129f9◈` maps to.
+
+**Bigger problem:** Even if you can see the values, without context you won't know *what* each piece of data is for. A password is useless if you don't know which service it belon"
+Keeper888/privacyguardian,issues,12,Descriptive Tokens: The Borrowed Tongue Architecture,[],2026-01-02T11:32:34Z,https://github.com/Keeper888/privacyguardian/issues/12,"## Summary
+
+Extend PrivacyGuardian from PII-only protection to **full semantic tokenization** with descriptive metadata hints.
+
+**Goal:** AI understands code structure and patterns without seeing actual sensitive values.
+
+## The Problem
+
+Current approach only protects PII patterns (emails, passwords, API keys). But:
+- Function names like `connect_to_acme_production` leak company identity
+- Hostnames like `db.acme-corp.internal` leak infrastructure
+- Comments often contain sensitive context
+
+## T"
+Keeper888/privacyguardian,issues,11,Implement LD_PRELOAD hook to protect GUI apps,[],2026-01-02T11:27:03Z,https://github.com/Keeper888/privacyguardian/issues/11,"## Summary
+
+Protect GUI apps (Antigravity, Cursor, Windsurf) by intercepting data BEFORE encryption, not at the network level.
+
+## Learning Doc
+
+Read first: [docs/learnings/0005-ld-preload-ssl-hook.md](https://github.com/Keeper888/privacyguardian/blob/main/docs/learnings/0005-ld-preload-ssl-hook.md)
+
+## The Idea
+
+```
+App prepares request with PII
+       ↓
+LD_PRELOAD hooks SSL_write ← WE INTERCEPT HERE
+       ↓
+Filter PII, replace with tokens
+       ↓
+App encrypts already-filtered data
+       ↓
+S"
+Keeper888/privacyguardian,issues,9,Verify: PII protection works when AI scans codebase (not just user input),[],2026-01-02T03:33:28Z,https://github.com/Keeper888/privacyguardian/issues/9,"## Context
+
+PrivacyGuardian works as a transparent proxy that intercepts all API traffic. In theory, this should protect PII in:
+
+1. **User inputs** (what you type/paste) ✅ Confirmed working
+2. **Codebase scans** (when AI reads files via tools) ✅ **CONFIRMED WORKING** (see below)
+
+## Evidence from Testing (2026-01-02)
+
+Stats progression during a Claude Code session:
+
+| When | Items Protected | Tokens |
+|------|-----------------|--------|
+| Start of session | 25 | 27 |
+| After reading files | 32 "
+Keeper888/privacyguardian,issues,8,Browser support for web-based LLM interfaces,[],2026-01-02T03:02:39Z,https://github.com/Keeper888/privacyguardian/issues/8,"## Summary
+Extend PrivacyGuardian to protect PII in browser-based LLM interfaces.
+
+## Current state
+Proxy supports API endpoints only:
+- `api.anthropic.com`, `api.openai.com`, etc.
+- Works with CLI tools and SDKs
+
+## Web interfaces to support
+- `claude.ai`
+- `chat.openai.com`
+- `gemini.google.com`
+- `chat.mistral.ai`
+
+## Challenges
+1. **HTTPS interception** - browsers use HTTPS directly
+2. **Different request format** - web apps use different JSON structures than APIs
+3. **Browser configuration*"
+Keeper888/privacyguardian,issues,4,GUI Dashboard for monitoring blocked PII,[],2025-12-30T20:45:10Z,https://github.com/Keeper888/privacyguardian/issues/4,"## Overview
+A lightweight GUI to show what PII has been intercepted and encrypted.
+
+## Design
+```
+┌─────────────────────────────────────────────────────────┐
+│  🛡️ PrivacyGuardian                              [—][×] │
+├─────────────────────────────────────────────────────────┤
+│  Status: ● ACTIVE                    Uptime: 2h 34m    │
+├─────────────────────────────────────────────────────────┤
+│  Protected Items Today:                                 │
+│  ┌───────────────────────────────────────"
+Keeper888/privacyguardian,issues,3,Desktop notification on startup,[],2025-12-30T20:45:08Z,https://github.com/Keeper888/privacyguardian/issues/3,"## Overview
+Show a desktop notification when PrivacyGuardian is active and protecting traffic.
+
+## Implementation
+Use `notify-send` or GTK notifications:
+
+```python
+import subprocess
+
+def notify_startup():
+    subprocess.run([
+        ""notify-send"",
+        ""--icon=security-high"",
+        ""--urgency=normal"",
+        ""🛡️ PrivacyGuardian Active"",
+        ""PII protection is now running. All LLM traffic is being filtered.""
+    ])
+```
+
+## Notification Events
+1. **Startup**: ""PrivacyGuardian Active - "
+Keeper888/privacyguardian,issues,2,Auto-start on boot (systemd service),[],2025-12-30T19:42:14Z,https://github.com/Keeper888/privacyguardian/issues/2,"## Overview
+PrivacyGuardian must start automatically when the OS boots, before any LLM apps launch.
+
+## Implementation
+
+### 1. Systemd User Service
+```ini
+# ~/.config/systemd/user/privacyguardian.service
+[Unit]
+Description=PrivacyGuardian PII Protection Proxy
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/home/raven/Desktop/ClaudeVault/Projects/privacyguardian/guardian start
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target
+```
+
+### 2. ipta"
+Mustafabeshara/medical-business-ai-agent,issues,7,Bump pnpm from 10.22.0 to 10.28.2,"['dependencies', 'javascript']",2026-01-26T21:10:55Z,https://github.com/Mustafabeshara/medical-business-ai-agent/pull/7,"Bumps [pnpm](https://github.com/pnpm/pnpm/tree/HEAD/pnpm) from 10.22.0 to 10.28.2.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pnpm/pnpm/releases"">pnpm's releases</a>.</em></p>
+<blockquote>
+<h2>pnpm 10.28.2</h2>
+<h2>Patch Changes</h2>
+<ul>
+<li>
+<p>Security fix: prevent path traversal in <code>directories.bin</code> field.</p>
+</li>
+<li>
+<p>When pnpm installs a <code>file:</code> or <code>git:</code> dependency, it now validates that symlinks point w"
+Mustafabeshara/medical-business-ai-agent,issues,1,Bump body-parser from 2.2.0 to 2.2.1 in /mcp-server,"['dependencies', 'javascript']",2025-11-25T19:52:17Z,https://github.com/Mustafabeshara/medical-business-ai-agent/pull/1,"Bumps [body-parser](https://github.com/expressjs/body-parser) from 2.2.0 to 2.2.1.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/expressjs/body-parser/releases"">body-parser's releases</a>.</em></p>
+<blockquote>
+<h2>v2.2.1</h2>
+<h2>Important: Security</h2>
+<ul>
+<li>Security fix for <a href=""https://www.cve.org/CVERecord?id=CVE-2025-13466"">CVE-2025-13466</a> (<a href=""https://github.com/expressjs/body-parser/security/advisories/GHSA-wqch-xfxh-vrr4"">GHSA"
+PranavShashidhara/MediAssist_AI,issues,1,test,[],2025-07-29T18:41:13Z,https://github.com/PranavShashidhara/MediAssist_AI/issues/1,"Tracks improvements across documentation, security, code structure, and notebook design in the Cold Pipeline codebase."
+Precise-Goals/Carex-AI---Healthcare-Ecosystem,issues,1,Fix React Server Components CVE vulnerabilities,[],2026-01-12T19:10:55Z,https://github.com/Precise-Goals/Carex-AI---Healthcare-Ecosystem/pull/1,"> [!IMPORTANT]
+> This is an automatic PR generated by Vercel to help you with patching efforts. We can't guarantee it's comprehensive, and it may contain mistakes. Please review our [guidance](https://vercel.link/additional-checks) before merging these changes.
+
+A critical remote code execution (RCE) vulnerability in React Server Components, impacting frameworks such as Next.js, was identified in the project [carex-ai](https://vercel.com/sarthaks-projects-e711f64f/carex-ai). The vulnerability en"
+SSameer20/SkinAI,issues,24,[BUG]: No Image upload option in homepage,"['bug', 'feature']",2024-11-25T20:35:26Z,https://github.com/SSameer20/SkinAI/issues/24,"**Describe the bug**
+No Image upload option in homepage
+
+**Additional context**
+
+"
+SSameer20/SkinAI,issues,15,Code Clean Up ,"['bug', 'assigned', 'completed']",2024-10-17T16:31:46Z,https://github.com/SSameer20/SkinAI/issues/15,Code Clean Up 
+SSameer20/SkinAI,issues,13,[BUG]: Tab Icon need to change,"['bug', 'assigned']",2024-10-16T09:20:27Z,https://github.com/SSameer20/SkinAI/issues/13,"**Describe the bug**
+Tab Icon need to change
+
+![Screenshot 2024-10-16 144433](https://github.com/user-attachments/assets/63a8992c-8b62-471f-9394-26108b2f05fa)
+
+**Possible File**
+`client\index.html`
+`client\public`"
+SSameer20/SkinAI,issues,9,[Feature] : Implement_Assist,['bug'],2024-10-15T04:39:51Z,https://github.com/SSameer20/SkinAI/issues/9,"Describe the feature/implementation
+Description of the feature or assistance you need with the implementation.
+
+Screenshots or mockups
+If applicable, add screenshots or mockups to help explain the feature or implementation details.
+
+Desktop (please complete the following information):
+OS: [e.g. Ubuntu 20.04]
+Browser [e.g. Chrome, Firefox]
+Version [e.g. 95]
+Smartphone (please complete the following information):
+Device: [e.g. iPhone X, Samsung Galaxy S10]
+OS: [e.g. iOS 14, Android 10]"
+SSameer20/SkinAI,issues,8,[Feature]: Mailing service for User Authentication ,"['bug', 'feature', 'assigned']",2024-10-08T17:55:23Z,https://github.com/SSameer20/SkinAI/issues/8,Mailing service for User Authentication 
+SSameer20/SkinAI,issues,7,[ISSUE] : Home page UI need to redesign,['bug'],2024-10-07T15:46:58Z,https://github.com/SSameer20/SkinAI/issues/7,"Need a good eye catching UI for Home page and following pages.
+"
+Smart-AI-Memory/empathy-framework,issues,15,chore(deps): Bump actions/setup-python from 5 to 6,"['ci', 'security']",2025-12-24T21:01:19Z,https://github.com/Smart-AI-Memory/empathy-framework/pull/15,"Bumps [actions/setup-python](https://github.com/actions/setup-python) from 5 to 6.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/actions/setup-python/releases"">actions/setup-python's releases</a>.</em></p>
+<blockquote>
+<h2>v6.0.0</h2>
+<h2>What's Changed</h2>
+<h3>Breaking Changes</h3>
+<ul>
+<li>Upgrade to node 24 by <a href=""https://github.com/salmanmkc""><code>@​salmanmkc</code></a> in <a href=""https://redirect.github.com/actions/setup-python/pull/1164"""
+Smart-AI-Memory/empathy-framework,issues,14,chore(deps): Bump actions/upload-artifact from 4 to 6,"['ci', 'security']",2025-12-24T21:01:18Z,https://github.com/Smart-AI-Memory/empathy-framework/pull/14,"Bumps [actions/upload-artifact](https://github.com/actions/upload-artifact) from 4 to 6.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/actions/upload-artifact/releases"">actions/upload-artifact's releases</a>.</em></p>
+<blockquote>
+<h2>v6.0.0</h2>
+<h2>v6 - What's new</h2>
+<blockquote>
+<p>[!IMPORTANT]
+actions/upload-artifact@v6 now runs on Node.js 24 (<code>runs.using: node24</code>) and requires a minimum Actions Runner version of 2.327.1. If you are u"
+Smart-AI-Memory/empathy-framework,issues,13,chore(deps): Bump devcontainers/python from 1-3.11-bullseye to 3.13-bullseye in /.devcontainer,['devcontainer'],2025-12-24T21:01:16Z,https://github.com/Smart-AI-Memory/empathy-framework/pull/13,"Bumps devcontainers/python from 1-3.11-bullseye to 3.13-bullseye.
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=devcontainers/python&package-manager=docker&previous-version=1-3.11-bullseye&new-version=3.13-bullseye)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter "
+Smart-AI-Memory/empathy-framework,issues,9,Add OpenSSF Scorecard badge to README,[],2025-11-26T23:35:09Z,https://github.com/Smart-AI-Memory/empathy-framework/pull/9,"## Description
+
+Adds the OpenSSF Scorecard badge to README.md for visibility into security best practices compliance. The scorecard workflow (`.github/workflows/scorecard.yml`) was already configured.
+
+## Type of Change
+
+- [ ] 🐛 Bug fix (non-breaking change which fixes an issue)
+- [ ] ✨ New feature (non-breaking change which adds functionality)
+- [ ] 💥 Breaking change (fix or feature that would cause existing functionality to not work as expected)
+- [x] 📝 Documentation update
+- [ ] 🎨 Code style "
+Smart-AI-Memory/empathy-framework,issues,6,Set up OpenSSF Scorecard for security badge,"['documentation', 'enhancement']",2025-11-16T17:11:05Z,https://github.com/Smart-AI-Memory/empathy-framework/issues/6,"## 🔒 Enhancement: OpenSSF Scorecard
+
+**Priority:** Medium
+**Type:** Security, Enhancement
+**Timeline:** Week 2-3
+
+### Goal
+
+Register with OpenSSF Scorecard to display security best practices badge and improve repository security posture.
+
+### Benefits
+
+- Security best practices badge on README
+- Automated security checks
+- Identify security improvements
+- Build trust with users
+- Industry-standard security scoring
+
+### Implementation Steps
+
+- [x] Visit https://securityscorecards.dev
+- [x] Regist"
+StanfordBDHG/HealthGPT,issues,52,LLM download not working,['bug'],2025-10-17T01:25:31Z,https://github.com/StanfordBDHG/HealthGPT/issues/52,"### Description
+
+When I select the local LLM option, it says that it's downloading Llama 3.2 3B model, but it stays at 0% of 100%, and doesn't appear to be downloading the model at all.
+
+### Reproduction
+
+select the Local LLM option and click download button.
+
+### Expected behavior
+
+the download would start
+
+### Additional context
+
+_No response_
+
+### Code of Conduct
+
+- [x] I agree to follow this project's Code of Conduct and Contributing Guidelines"
+StanfordBDHG/HealthGPT,issues,44,🐛 Bug report: I am using iPhone 14 and I am unable to access health data,['bug'],2025-02-04T15:23:47Z,https://github.com/StanfordBDHG/HealthGPT/issues/44,"### Description
+
+The description says it all. I have setup a development environment and I am trying to run the app on my iPhone 14, and I also see HealthApp and and see number of steps and various data.
+
+When I go to HealthGPT and configure with OpenAI and I am asking questions, it is always coming back with data not available as shown in the image. Am I doing something wrong?
+
+![Image](https://github.com/user-attachments/assets/08ea5bdb-0fda-486c-9ef2-ab8b37600d3b)
+
+### Reproduction
+
+Please se"
+StanfordBDHG/HealthGPT,issues,40,TestFlight Link Closed,['bug'],2024-09-25T10:07:13Z,https://github.com/StanfordBDHG/HealthGPT/issues/40,"### Description
+
+The TestFlight link isn't working anymore. Are you open to new users? I'm interested.
+
+### Reproduction
+
+N/A
+
+### Expected behavior
+
+Users can try the app using TestFlight
+
+### Additional context
+
+_No response_
+
+### Code of Conduct
+
+- [X] I agree to follow this project's Code of Conduct and Contributing Guidelines"
+StanfordBDHG/HealthGPT,issues,39,Adds support for on-device LLMs with SpeziLLMLocal,[],2024-04-04T10:49:20Z,https://github.com/StanfordBDHG/HealthGPT/pull/39,"# Adds support for on-device LLMs with SpeziLLMLocal
+
+## :recycle: Current situation & Problem
+Currently, the app can only use OpenAI models such as GPT-4. However, users may prefer to run an LLM on-device for increased privacy. This is now supported via the [SpeziLLMLocal](https://swiftpackageindex.com/stanfordspezi/spezillm/documentation/spezillmlocal) target of the [SpeziLLM module](https://github.com/Stanfordspezi/spezillm) and can be enabled in HealthGPT.
+
+## :gear: Release Notes 
+- A"
+StanfordBDHG/HealthGPT,issues,30,Error Querying OpenAI Api,['bug'],2023-06-18T12:17:24Z,https://github.com/StanfordBDHG/HealthGPT/issues/30,"### Description
+
+I'm receiving the following error in the console after submitting a message:
+
+Error querying OpenAI API: keyNotFound(CodingKeys(stringValue: ""id"", intValue: nil), Swift.DecodingError.Context(codingPath: [], debugDescription: ""No value associated with key CodingKeys(stringValue: \""id\"", intValue: nil) (\""id\"")."", underlyingError: nil))
+
+I have tried adding the api key both on the welcome screen in the app as well as in the OpenAI-info in supporting files.
+
+
+
+### Reproductio"
+StanfordBDHG/HealthGPT,issues,8,Stream GPT Responses,"['bug', 'enhancement']",2023-04-19T16:27:55Z,https://github.com/StanfordBDHG/HealthGPT/issues/8,"### Use Case
+
+It would be great if the UI and logic would support streaming GPT responses to the client UI.
+
+### Problem
+
+The streaming of responses to the client is currently broken and tracked in https://github.com/MacPaw/OpenAI/issues/14
+
+### Solution
+
+Incorporate the feature once https://github.com/MacPaw/OpenAI/issues/14 is closed.
+
+### Code of Conduct
+
+- [X] I agree to follow this project's Code of Conduct and Contributing Guidelines"
+TarekkMU1911/AI-Agent-Diabetes-Diagnosis,issues,14,Adding Updates of the GPTneo,['enhancement'],2025-09-10T16:44:11Z,https://github.com/TarekkMU1911/AI-Agent-Diabetes-Diagnosis/pull/14,"Adding the new notebook of GPTneo tuning and it is just the notebook because of the leakage of free credits on lighting ai,  so any one wants to run it he can do it and this version is for 50k records of the final dataset not all of it"
+TarekkMU1911/AI-Agent-Diabetes-Diagnosis,issues,7,Fix: Fixing the dataset json file,['bug'],2025-09-06T23:40:09Z,https://github.com/TarekkMU1911/AI-Agent-Diabetes-Diagnosis/pull/7,"Fixing the UCI Patients json dataset file, and organizing the structure of the branch by deleting un-needed files these are used in the other branches but not in this branch (Notebooks, Codes, Datasets)and created a directory for the preprocessed json dataset."
+TarekkMU1911/AI-Agent-Diabetes-Diagnosis,issues,6,Fix: Fixing the UCI Patients json dataset file,['bug'],2025-09-06T23:26:41Z,https://github.com/TarekkMU1911/AI-Agent-Diabetes-Diagnosis/pull/6,"Fixing the UCI Patients json dataset file, and organizing the structure of the branch by deleting the unused files these belongs to other branches (datasets, notebooks, codes)"
+The-Swarm-Corporation/HospitalSim,issues,6,[FEAT][[Improve Prompts],['bug'],2025-08-11T17:27:47Z,https://github.com/The-Swarm-Corporation/HospitalSim/issues/6,"- Improve the prompting for the agents, they are trying to predict the future"
+The-Swarm-Corporation/MedGuard,issues,29,Bump pypa/gh-action-pypi-publish from 1.9.0 to 1.13.0,"['dependencies', 'github_actions']",2025-09-08T21:27:10Z,https://github.com/The-Swarm-Corporation/MedGuard/pull/29,"Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publish) from 1.9.0 to 1.13.0.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pypa/gh-action-pypi-publish/releases"">pypa/gh-action-pypi-publish's releases</a>.</em></p>
+<blockquote>
+<h2>v1.13.0</h2>
+<!-- raw HTML omitted -->
+<blockquote>
+<p>[!important]
+🚨 This release includes fixes for <a href=""https://github.com/pypa/gh-action-pypi-publish/security/advisories/GHSA-vxmw-7h4f-hq"
+The-Swarm-Corporation/MedicalCoderSwarm,issues,36,Bump pypa/gh-action-pypi-publish from 1.9.0 to 1.13.0,"['dependencies', 'github_actions']",2025-09-08T20:40:41Z,https://github.com/The-Swarm-Corporation/MedicalCoderSwarm/pull/36,"Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publish) from 1.9.0 to 1.13.0.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pypa/gh-action-pypi-publish/releases"">pypa/gh-action-pypi-publish's releases</a>.</em></p>
+<blockquote>
+<h2>v1.13.0</h2>
+<!-- raw HTML omitted -->
+<blockquote>
+<p>[!important]
+🚨 This release includes fixes for <a href=""https://github.com/pypa/gh-action-pypi-publish/security/advisories/GHSA-vxmw-7h4f-hq"
+The-Swarm-Corporation/radiology-swarm,issues,21,Bump pypa/gh-action-pypi-publish from 1.9.0 to 1.13.0,"['dependencies', 'github_actions']",2025-09-08T00:20:19Z,https://github.com/The-Swarm-Corporation/radiology-swarm/pull/21,"Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publish) from 1.9.0 to 1.13.0.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/pypa/gh-action-pypi-publish/releases"">pypa/gh-action-pypi-publish's releases</a>.</em></p>
+<blockquote>
+<h2>v1.13.0</h2>
+<!-- raw HTML omitted -->
+<blockquote>
+<p>[!important]
+🚨 This release includes fixes for <a href=""https://github.com/pypa/gh-action-pypi-publish/security/advisories/GHSA-vxmw-7h4f-hq"
+UCSC-VLAA/o1_medical,issues,2,无法找到lancet的data,['bug'],2025-01-04T15:11:50Z,https://github.com/UCSC-VLAA/o1_medical/issues/2,"### Describe the bug
+
+感谢作者贡献很好的评测平台，但是似乎论文中提到了lancet的data，但是我无法在你们原始的仓库里面找到他们，是我miss它了吗？
+
+### To Reproduce
+
+已经成功git lfs pull了，但是并未找到lancet的数据
+
+### Code snippets
+
+```Python
+None
+```
+
+
+### OS
+
+linux
+
+### Python version
+
+v3.9
+
+### Library version
+
+None"
+UCSC-VLAA/o1_medical,issues,1,You may want to remove the leaked api keys.,[],2024-09-25T09:10:29Z,https://github.com/UCSC-VLAA/o1_medical/issues/1,"As the title described, check your code and remove the api keys.
+﻿
+Leave me along if you share the keys intentionally."
+WangRongsheng/CareGPT,issues,13,在执行export_model.py脚本时保存模型验证出错,['bug'],2024-02-22T06:48:02Z,https://github.com/WangRongsheng/CareGPT/issues/13,"### 执行命令
+```shell
+python src/export_model.py --model_name_or_path ～/Documents/machine_learn/llama-2-7b-chat-hf --checkpoint_dir ～/Documents/machine_learn/CareLlama2-7b-super --finetuning_type lo
+ra --template llama2 --output_dir ./marged
+```
+### 出错信息
+```shell
+Thrown during validation:
+[UserWarning('`do_sample` is set to `False`. However, `temperature` is set to `0.9` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.'), Use"
+WangRongsheng/CareGPT,issues,6,启动gradio报错,['bug'],2023-11-10T09:48:53Z,https://github.com/WangRongsheng/CareGPT/issues/6,"你好，为了快速体验一下微调后llama2的医疗问答效果，我从您提供的地址“wangrongsheng/CareLlama2-7b-multi“下载了模型，并将其放在CareGPT跟目录下，然后修改CareGPT/Gradio/model.py中的底7行model_id = '../CareLlama2-7b-multi'。然后按照文档安装完依赖，执行python app.py，报了下面的错，请问大佬，这大概是哪里出了问题？
+
+OSError: Unable to load weights from pytorch checkpoint file for '../CareLlama2-7b-multi/pytorch_model-00001-of-00002.bin' at '../CareLlama2-7b-multi/pytorch_model-00001-of-00002.bin'. If you tried to load a PyTorch model from a TF 2.0 checkpoint, please set from_tf=True."
+berntpopp/phentrieve,issues,124,test_embeddings_real.py fails on macOS - expects CPU but gets MPS device,['bug'],2025-12-08T14:24:44Z,https://github.com/berntpopp/phentrieve/issues/124,"## Description
+
+Test `tests/unit/core/test_embeddings_real.py::TestLoadEmbeddingModel::test_default_model_cpu` fails on macOS because the embedding model is automatically moved to MPS (Metal Performance Shaders) device instead of CPU.
+
+## Error
+
+```
+AssertionError: expected call not found.
+Expected: to('cpu')
+  Actual: to('mps')
+```
+
+## Root Cause
+
+The test assumes the model will use CPU, but PyTorch automatically selects MPS on Apple Silicon Macs when available. The test mock verification is to"
+berntpopp/phentrieve,issues,122,Benchmark command fails when no model is specified,['bug'],2025-12-08T09:04:28Z,https://github.com/berntpopp/phentrieve/issues/122,"### Issue: Benchmark command fails when no model is specified
+
+**Description:**
+When running `phentrieve benchmark run` without the `--model-name` option, the command fails with an error about a missing Chroma collection for an empty model name. This occurs because the CLI code incorrectly passes an empty string (```) as the `model_name` parameter, overriding the default model configured in `phentrieve.yaml`.
+
+**Steps to Reproduce:**
+1. Ensure the default model is set in `phentrieve.yaml` (e.g.,"
+berntpopp/phentrieve,issues,111,Deploy: hpo_core_data needs write access for hpo_data.db generation,[],2025-12-01T10:38:00Z,https://github.com/berntpopp/phentrieve/issues/111,"## Problem
+
+The security-hardened `docker-compose.yml` mounts the data directory as read-only (`:ro`), but the HPO database file (`hpo_data.db`) needs to be created during data preparation, which requires write access.
+
+**Error:**
+```
+docker exec phentrieve_repo-phentrieve_api-1 phentrieve data prepare
+...
+ERROR - HPO data preparation failed: Failed to initialize database: unable to open database file
+```
+
+**Root cause:**
+```yaml
+volumes:
+  # Data mount - read-only by default for security
+  - ${"
+berntpopp/phentrieve,issues,110,Docs: Breaking changes in Docker security hardening need migration guide,[],2025-12-01T10:00:10Z,https://github.com/berntpopp/phentrieve/issues/110,"## Summary
+
+The recent Docker security hardening changes introduced several breaking changes that affect existing deployments. There is no migration guide or upgrade documentation, causing production failures when users update.
+
+## Related Issues
+
+This is a meta-issue tracking the deployment problems discovered during a production update:
+
+| Issue | Problem | Severity |
+|-------|---------|----------|
+| #105 | Frontend healthcheck uses `curl` (not in Alpine) | Low - cosmetic |
+| #106 | CORS `allo"
+berntpopp/phentrieve,issues,108,Deploy: ChromaDB permissions fail with non-root container user,[],2025-12-01T09:58:30Z,https://github.com/berntpopp/phentrieve/issues/108,"## Problem
+
+After updating to the security-hardened Docker configuration, the API fails to access the ChromaDB indexes due to permission mismatch between the container user and the host filesystem ownership.
+
+**Error in logs:**
+```
+ERROR:root:Error connecting to ChromaDB: /phentrieve_data_mount/indexes: error returned from database: (code: 8) attempt to write a readonly database
+ERROR:root:DenseRetriever: Failed to connect to Chroma collection 'phentrieve_biolord_2023_m' at '/phentrieve_data_mou"
+berntpopp/phentrieve,issues,104,fix(security): Remove vulnerable setuptools from base image,[],2025-11-30T22:00:38Z,https://github.com/berntpopp/phentrieve/pull/104,"## Summary
+
+Removes vulnerable setuptools from the Python base image's system site-packages to resolve Trivy security alerts.
+
+**Root Cause**: The base `python:3.11-slim-bookworm` image ships with setuptools 65.5.1 in `/usr/local/lib/python3.11/site-packages/`. Even though we upgrade setuptools to >=78.1.1 in the virtual environment, Trivy still detects the vulnerable system-level package.
+
+**Solution**: Remove setuptools, _distutils_hack, and pkg_resources from the base image in the runtime sta"
+berntpopp/phentrieve,issues,103,fix(security): Upgrade SQLite from 3.42.0 to 3.51.1,[],2025-11-30T21:35:19Z,https://github.com/berntpopp/phentrieve/pull/103,"## Summary
+
+- Upgrade SQLite from 3.42.0 to 3.51.1 to fix critical CVEs
+- Switch from SHA256 to SHA3-256 checksum verification (SQLite 3.51+ requirement)
+
+## CVEs Fixed
+
+- **CVE-2025-7458** (Critical): SQLite integer overflow vulnerability
+- **CVE-2025-6965** (Critical): Integer truncation in SQLite
+
+## Changes
+
+1. Update `SQLITE_VERSION` from `3420000` to `3510100`
+2. Update `SQLITE_YEAR` from `2023` to `2025`
+3. Switch from `SQLITE_SHA256` to `SQLITE_SHA3_256` with new checksum
+4. Change verif"
+berntpopp/phentrieve,issues,101,fix(security): Address remaining CodeQL and Dockle security alerts,[],2025-11-30T20:45:35Z,https://github.com/berntpopp/phentrieve/pull/101,"## Summary
+
+This PR addresses the remaining security scanning alerts from CodeQL and Dockle that were introduced after the comprehensive security infrastructure was set up.
+
+### CodeQL Fixes (9 alerts addressed)
+
+**Unused Global Variables (`py/unused-global-variable`):**
+- Added `__all__` exports to `api/config.py` to explicitly declare the public API and help CodeQL understand cross-module usage
+- Added `__all__` exports to `phentrieve/config.py` for the same reason
+- Note: The 4 alerts in `que"
+berntpopp/phentrieve,issues,100,fix(codeql): Resolve static analysis security alerts,[],2025-11-30T17:44:10Z,https://github.com/berntpopp/phentrieve/pull/100,"## Summary
+- Fix all ERROR-level CodeQL alerts (uninitialized local variables)
+- Fix all WARNING-level CodeQL alerts (unreachable code, procedure return value)
+- Fix multiple NOTE-level code quality issues (imports, unused variables, context managers)
+
+## Changes Made
+
+### ERROR Fixes (Critical)
+- `tests/e2e/test_docker_health.py`: Initialize `data: dict = {}` before try blocks to prevent uninitialized variable access
+
+### WARNING Fixes
+- `phentrieve/evaluation/semantic_metrics.py`: Remove dead "
+berntpopp/phentrieve,issues,98,fix(security): Resolve all npm vulnerabilities and improve CI disk space,[],2025-11-30T16:59:51Z,https://github.com/berntpopp/phentrieve/pull/98,"## Summary
+
+Resolves all 6 Dependabot security alerts:
+- #22 glob CLI command injection (High)
+- #18 vite server.fs.deny bypass on Windows (Moderate)  
+- #5 Got redirect to UNIX socket (Moderate)
+- #1 esbuild development server vulnerability (Moderate)
+- #14 Vite middleware public directory issue (Low)
+- #15 Vite server.fs HTML files issue (Low)
+
+## Changes
+
+### Frontend Security Fixes
+- **Remove `vite-plugin-imagemin`** - Unmaintained plugin causing 29 of 33 vulnerabilities
+- **Upgrade vite 4.x"
+berntpopp/phentrieve,issues,97,feat(security): Add comprehensive security scanning infrastructure,[],2025-11-30T16:13:35Z,https://github.com/berntpopp/phentrieve/pull/97,"## Summary
+
+- Add multi-layered security scanning to CI/CD pipeline
+- pip-audit and Bandit for Python security
+- eslint-plugin-security and npm audit for JavaScript
+- CodeQL SAST for both languages
+- Dockle CIS benchmark scanning for Docker images
+- Dependency Review action to block vulnerable PRs
+
+## Changes
+
+### New Workflows
+- `security.yml` - pip-audit, Bandit, npm audit scans
+- `codeql.yml` - GitHub CodeQL SAST (Python + JavaScript)
+
+### Updated Workflows  
+- `docker-publish.yml` - Added Do"
+berntpopp/phentrieve,issues,75,docs: Modernize documentation to reflect current architecture,[],2025-11-19T06:43:59Z,https://github.com/berntpopp/phentrieve/pull/75,"## Summary
+
+Comprehensive documentation update to align with modern toolchain (uv, SQLite, Typer, Docker security) and provide both beginner-friendly introductions and advanced technical details.
+
+This PR modernizes all user-facing documentation to accurately reflect the production codebase as of 2025-01-19.
+
+## Updated Files (7 files)
+
+### 📚 Getting Started (Phase 1)
+
+#### `docs/getting-started/installation.md`
+- ✅ Updated for uv package manager (10-100x faster than pip)
+- ✅ Docker production d"
+berntpopp/phentrieve,issues,74,Refactor HPO data storage from files to SQLite database,[],2025-11-19T06:10:27Z,https://github.com/berntpopp/phentrieve/pull/74,"## Summary
+
+Replaces file-based HPO data storage (17,000+ JSON files + pickle files) with a single SQLite database, delivering significant performance and security improvements.
+
+### Key Changes
+
+**Database Implementation**
+- ✅ New `HPODatabase` helper class with comprehensive API
+- ✅ 30 unit tests with 98% coverage
+- ✅ SQLite3 with WAL mode, WITHOUT ROWID tables, optimized indexes
+- ✅ Stores 19,534 HPO terms with full metadata (labels, definitions, synonyms, comments)
+- ✅ Stores graph metadata "
+berntpopp/phentrieve,issues,44,chore(deps)(deps): bump the actions-updates group with 2 updates,[],2025-11-16T16:56:05Z,https://github.com/berntpopp/phentrieve/pull/44,"Bumps the actions-updates group with 2 updates: [hadolint/hadolint-action](https://github.com/hadolint/hadolint-action) and [aquasecurity/trivy-action](https://github.com/aquasecurity/trivy-action).
+
+Updates `hadolint/hadolint-action` from 3.1.0 to 3.3.0
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/hadolint/hadolint-action/releases"">hadolint/hadolint-action's releases</a>.</em></p>
+<blockquote>
+<h2>v3.3.0</h2>
+<h1><a href=""https://github.com/hadolint"
+berntpopp/phentrieve,issues,5,refactor: Implement MaxOntSim@K Metric for Benchmark Evaluation,"['bug', 'enhancement']",2025-05-08T05:51:27Z,https://github.com/berntpopp/phentrieve/issues/5,"**Description:**
+The current Ontology Similarity metric (`OntSim@K`) calculates the *average* of the maximum similarities found for each expected term within the top K results. This doesn't align with the user requirement to capture the single *best* semantic match achieved between *any* expected term and *any* top K retrieved term, similar to how Hit Rate captures the best exact match.
+
+This issue tracks the implementation of a new metric, ""Maximum Ontology Similarity @ K"" (`MaxOntSim@K`), whic"
+bhupencoD3/DiagnoAI,issues,27,Medical Retriever: Intent-Aware Document Retrieva,[],2025-10-12T12:08:09Z,https://github.com/bhupencoD3/DiagnoAI/pull/27,"## Summary
+Implement intelligent medical document retriever with query intent analysis and relevance filtering.
+
+## Features
+- **Intent Analysis**: Pattern-based detection of symptom, treatment, cause, diagnosis, prevention, and drug queries
+- **Relevance Filtering**: Strict relevance checking with medical condition matching
+- **Source-Aware Boosting**: Priority weighting for different medical data sources
+- **Query Complexity Assessment**: Dynamic result count based on query complexity
+"
+bhupencoD3/DiagnoAI,issues,24,Vector Store: Automated Setup and Testing Script,[],2025-10-12T08:09:36Z,https://github.com/bhupencoD3/DiagnoAI/pull/24,"## Summary
+Add automated vector store setup script with data loading and retrieval testing.
+
+## Features
+- **Automated Setup**: One-command vector store initialization with medical data
+- **Configuration Validation**: Pre-flight checks for settings and dependencies
+- **Data Loading**: Bulk ingestion of medical chunks with progress tracking
+- **Retrieval Testing**: Automated test queries to validate search functionality
+- **Comprehensive Logging**: Detailed progress and error reporting
+"
+bhupencoD3/DiagnoAI,issues,7,XML Data Extraction,[],2025-10-06T17:42:26Z,https://github.com/bhupencoD3/DiagnoAI/pull/7,"Builds robust XML parser for MedlinePlus dataset:
+- Handles large XML files (355k+ lines) without OOM
+- Extracts structured medical data (content, synonyms, MeSH)
+- Memory-efficient batch processing
+- Comprehensive error handling and recovery"
+bhupencoD3/DiagnoAI,issues,1,Medical Dataset Foundation,[],2025-10-04T13:42:37Z,https://github.com/bhupencoD3/DiagnoAI/pull/1,"Adds the core medical knowledge base from MedlinePlus containing:
+- 1,017 English health topics covering diseases, symptoms, treatments
+- 923 processed chunks optimized for RAG retrieval
+- Quality metrics showing 95% good+excellent content quality
+- Raw XML source files for reproducibility"
+biocontext-ai/knowledgebase-mcp,issues,2,Add MseeP.ai badge,[],2025-09-13T07:04:02Z,https://github.com/biocontext-ai/knowledgebase-mcp/pull/2,"Hi there,
+
+This pull request shares a security update on knowledgebase-mcp.
+
+We also have an entry for knowledgebase-mcp in our directory, MseeP.ai, where we provide regular security and trust updates on your app.
+
+We invite you to add our badge for your MCP server to your README to help your users learn from a third party that provides ongoing validation of knowledgebase-mcp.
+
+You can easily take control over your listing for free: visit it at https://mseep.ai/app/biocontext-ai-knowledgebase-mc"
+biocontext-ai/mcp-server-cookiecutter,issues,4,Wrong placeholder in conf.py for docs,['bug'],2025-10-26T21:05:41Z,https://github.com/biocontext-ai/mcp-server-cookiecutter/issues/4,"With the project `skill-to-mcp` with the Python package named `skill_to_mcp` (with underscores, hitting enter on the setup assistant), the docs don't build by default and I had to change the name in the conf.py file. Also caused some other problem I forgot, but best to check whether any hyphen to underscore conversion or a reference to the wrong variable are behind this."
+fleXRPL/healthweave,issues,58,fix(security): bump next from 16.1.1 to 16.1.5 in /frontend,"['security', 'frontend', 'dependencies']",2026-01-27T22:30:34Z,https://github.com/fleXRPL/healthweave/pull/58,"Bumps [next](https://github.com/vercel/next.js) from 16.1.1 to 16.1.5.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/vercel/next.js/releases"">next's releases</a>.</em></p>
+<blockquote>
+<h2>v16.1.5</h2>
+<p>Please refer the following changelogs for more information about this security release:</p>
+<p><a href=""https://vercel.com/changelog/summaries-of-cve-2025-59471-and-cve-2025-59472"">https://vercel.com/changelog/summaries-of-cve-2025-59471-and-cve-2025"
+fleXRPL/healthweave,issues,55,chore(deps): remove unused joi dependency,['code-quality'],2026-01-26T16:05:56Z,https://github.com/fleXRPL/healthweave/pull/55,"Remove joi package (v17.13.3) as it is not used anywhere in the codebase.
+
+- Removed from package.json dependencies
+- Updated package-lock.json via npm uninstall
+- No code changes required (package was never imported)
+
+Rationale:
+
+- Reduces bundle size and dependency tree complexity
+- Eliminates unnecessary security surface area
+- Follows ""don't install what you don't use"" principle
+
+Related: #39 , #54 "
+fleXRPL/healthweave,issues,53,fix(security): bump qs and body-parser in /backend,"['security', 'backend', 'dependencies']",2026-01-18T17:27:30Z,https://github.com/fleXRPL/healthweave/pull/53,"Bumps [qs](https://github.com/ljharb/qs) and [body-parser](https://github.com/expressjs/body-parser). These dependencies needed to be updated together.
+Updates `qs` from 6.13.0 to 6.14.1
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/ljharb/qs/blob/main/CHANGELOG.md"">qs's changelog</a>.</em></p>
+<blockquote>
+<h2><strong>6.14.1</strong></h2>
+<ul>
+<li>[Fix] ensure arrayLength applies to <code>[]</code> notation as well</li>
+<li>[Fix] <code>parse</code>: when"
+fleXRPL/healthweave,issues,51,Feature/types node 25 upgrade,"['security', 'frontend', 'backend']",2025-12-31T03:42:02Z,https://github.com/fleXRPL/healthweave/pull/51,"## Summary
+
+Upgrades `@types/node` from 22.19.0 to 25.0.3 for both backend and frontend, with fixes for stricter TypeScript checking introduced in the new version.
+
+## Changes
+
+### Package Upgrades
+| Package | Location | From | To |
+|---------|----------|------|-----|
+| @types/node | backend | 22.19.0 | 25.0.3 |
+| @types/node | frontend | 22.19.0 | 25.0.3 |
+
+### TypeScript Fixes (Stricter Checking in v25)
+
+#### Unused Parameters (TS6133)
+Prefixed with underscore to indicate intent"
+fleXRPL/healthweave,issues,50,fix(security): bump qs and express in /backend,"['security', 'backend', 'dependencies']",2025-12-31T03:20:40Z,https://github.com/fleXRPL/healthweave/pull/50,"Bumps [qs](https://github.com/ljharb/qs) to 6.14.1 and updates ancestor dependency [express](https://github.com/expressjs/express). These dependencies need to be updated together.
+
+Updates `qs` from 6.13.0 to 6.14.1
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/ljharb/qs/blob/main/CHANGELOG.md"">qs's changelog</a>.</em></p>
+<blockquote>
+<h2><strong>6.14.1</strong></h2>
+<ul>
+<li>[Fix] ensure arrayLength applies to <code>[]</code> notation as well</li>
+<li>["
+fleXRPL/healthweave,issues,49,fix(security): bump js-yaml from 3.14.1 to 3.14.2 in /backend,"['security', 'backend', 'dependencies']",2025-12-31T03:20:33Z,https://github.com/fleXRPL/healthweave/pull/49,"Bumps [js-yaml](https://github.com/nodeca/js-yaml) from 3.14.1 to 3.14.2.
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/nodeca/js-yaml/blob/master/CHANGELOG.md"">js-yaml's changelog</a>.</em></p>
+<blockquote>
+<h2>[3.14.2] - 2025-11-15</h2>
+<h3>Security</h3>
+<ul>
+<li>Backported v4.1.1 fix to v3</li>
+</ul>
+<h2>[4.1.1] - 2025-11-12</h2>
+<h3>Security</h3>
+<ul>
+<li>Fix prototype pollution issue in yaml merge (&lt;&lt;) operator.</li>
+</ul>
+<h2>[4.1.0] - 2021-04"
+fleXRPL/healthweave,issues,47,chore: configure Dependabot for security-only updates,['security'],2025-12-31T02:26:26Z,https://github.com/fleXRPL/healthweave/pull/47,"- Set open-pull-requests-limit: 0 to disable version update PRs
+- Security vulnerability PRs still come through automatically
+- Changed schedule from weekly to monthly
+- Updated labels to include 'security'
+- Changed commit prefix to fix(security)
+
+This reduces PR noise while maintaining security coverage."
+fleXRPL/healthweave,issues,37,chore(deps): bump js-yaml from 4.1.0 to 4.1.1 in /frontend,"['frontend', 'dependencies']",2025-12-24T02:02:49Z,https://github.com/fleXRPL/healthweave/pull/37,"Bumps [js-yaml](https://github.com/nodeca/js-yaml) from 4.1.0 to 4.1.1.
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/nodeca/js-yaml/blob/master/CHANGELOG.md"">js-yaml's changelog</a>.</em></p>
+<blockquote>
+<h2>[4.1.1] - 2025-11-12</h2>
+<h3>Security</h3>
+<ul>
+<li>Fix prototype pollution issue in yaml merge (&lt;&lt;) operator.</li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/nodeca/js-yaml/commit"
+fleXRPL/healthweave,issues,35,Dependabot Dependency Updates - December 2025,"['security', 'dependencies']",2025-12-24T01:26:36Z,https://github.com/fleXRPL/healthweave/issues/35,"## Summary
+
+Tracking issue for all Dependabot dependency updates. PRs are categorized by risk level and should be merged in phases.
+
+## Phase 1 - Safe to Merge ✅
+
+Low risk patch/minor updates that can be merged immediately:
+
+| PR | Package | Change | Status |
+|----|---------|--------|--------|
+| #34 | winston | 3.18.3 → 3.19.0 | 🟢 Safe |
+| #32 | @anthropic-ai/sdk | 0.68.0 → 0.71.2 | 🟢 Safe |
+| #28 | pdfjs-dist | 5.4.394 → 5.4.449 | 🟢 Safe |
+| #26 | prettier | 3.6.2 → 3.7.4 | 🟢 Safe |
+| #25 | esl"
+fleXRPL/healthweave,issues,31,chore(deps): bump multer and @types/multer in /backend,['backend'],2025-12-23T01:17:10Z,https://github.com/fleXRPL/healthweave/pull/31,"Bumps [multer](https://github.com/expressjs/multer) and [@types/multer](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/HEAD/types/multer). These dependencies needed to be updated together.
+Updates `multer` from 1.4.5-lts.2 to 2.0.2
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/expressjs/multer/releases"">multer's releases</a>.</em></p>
+<blockquote>
+<h2>v2.0.2</h2>
+<h2>Important</h2>
+<ul>
+<li>Fix <a href=""https://www.cve.org/CVERecord?id=CVE-20"
+fleXRPL/healthweave,issues,16,"Add CODEOWNERS, DEPENDABOT.yml, DEPENDABOT.md, and SECURITY.md","['documentation', 'enhancement']",2025-12-14T06:44:21Z,https://github.com/fleXRPL/healthweave/pull/16,"Add `CODEOWNERS`, `DEPENDABOT.yml`, `DEPENDABOT.md`, and `SECURITY.md` as specified in https://github.com/fleXRPL/healthweave/issues/14"
+fleXRPL/healthweave,issues,14,🛡️ Repository Security Configuration,"['enhancement', 'P0', 'security', 'devops']",2025-12-10T04:41:21Z,https://github.com/fleXRPL/healthweave/issues/14,"## Summary
+Configure GitHub repository security features including branch protections, Dependabot, secret scanning, and security policies to meet production-grade repository standards.
+
+## Background
+Per user requirements, the repository must include proper security configurations:
+- Dependabot Security Scanning
+- Branch protections for safe deployments
+- SonarQube Cloud for code quality and vulnerability detection
+- Security policies and responsible disclosure
+
+## Acceptance Criteria
+- [ ] Bran"
+fleXRPL/healthweave,issues,8,☁️ Production Infrastructure (IaC),"['enhancement', 'P0', 'devops', 'infrastructure']",2025-12-09T19:02:21Z,https://github.com/fleXRPL/healthweave/issues/8,"## Summary
+Create Infrastructure as Code (IaC) using Terraform or AWS CDK to provision and manage production AWS resources consistently and repeatably.
+
+## Background
+Currently only LocalStack exists for local development. Production deployment requires:
+- Real AWS S3 bucket with encryption and versioning
+- DynamoDB tables with proper capacity
+- Bedrock access with BAA for HIPAA compliance
+- VPC and security groups
+- CloudFront CDN for frontend
+
+## Acceptance Criteria
+- [ ] Terraform/CDK scripts"
+fleXRPL/healthweave,issues,7,🔒 Security Hardening,"['enhancement', 'P0', 'security', 'backend']",2025-12-09T19:01:53Z,https://github.com/fleXRPL/healthweave/issues/7,"## Summary
+Harden the application security by removing development defaults, implementing proper secrets management, adding input validation, rate limiting, and request sanitization.
+
+## Background
+The current codebase contains **critical security vulnerabilities**:
+- Hard-coded development secrets in `utils/config.ts`
+- No input validation on API endpoints
+- No rate limiting (vulnerable to DoS)
+- No request sanitization
+
+## Acceptance Criteria
+- [ ] All hard-coded secrets removed from codebase
+"
+fleXRPL/healthweave,issues,6,🚀 CI/CD Pipeline Setup,"['enhancement', 'P0', 'devops']",2025-12-09T19:01:28Z,https://github.com/fleXRPL/healthweave/issues/6,"## Summary
+Implement automated CI/CD pipelines using GitHub Actions for continuous integration, testing, code quality scanning, and deployment automation.
+
+## Background
+Currently there is **no automation**. Per user requirements, the project must include:
+- GitHub Actions workflows
+- SonarQube Cloud integration
+- Dependabot security scanning
+
+## Acceptance Criteria
+- [ ] PR checks run automatically (lint, type-check, test)
+- [ ] All tests must pass before merge
+- [ ] SonarQube quality gate must"
+fleXRPL/healthweave,issues,4,🔐 Authentication & Authorization Implementation,"['enhancement', 'P0', 'security', 'frontend', 'backend']",2025-12-09T18:59:39Z,https://github.com/fleXRPL/healthweave/issues/4,"## Summary
+Implement a complete authentication and authorization system using AWS Cognito to replace the current hard-coded `test-user` placeholder throughout the application.
+
+## Background
+The current codebase has **no authentication**. All API endpoints use a hard-coded `test-user` string (see `backend/src/handlers/analysis.ts` line 41). This is a critical security gap that must be resolved before production deployment.
+
+## Acceptance Criteria
+- [ ] AWS Cognito User Pool is configured and dep"
+fleXRPL/healthweave,issues,3,HealthWeave Production Readiness Assessment & Plan,['enhancement'],2025-12-09T18:12:10Z,https://github.com/fleXRPL/healthweave/issues/3,"## Summary
+
+HealthWeave has a **solid MVP foundation** with working document upload, AI analysis (via AWS Bedrock/Ollama/Anthropic), report storage, and PDF generation. The architecture is well-designed for HIPAA compliance. However, **significant work remains** to meet production deployment standards, particularly around authentication, testing, CI/CD, and security hardening.
+
+---
+
+## Current State: What's Complete ✅
+
+### Frontend (Next.js 15 + React 19 + TypeScript)
+- ✅ File upload with drag-a"
+kalviumcommunity/HealthGPT,issues,7,Implemented Structured output,"['Possible security concern', 'Review effort 2/5']",2025-08-12T19:03:58Z,https://github.com/kalviumcommunity/HealthGPT/pull/7,"### **PR Type**
+Enhancement
+
+
+___
+
+### **Description**
+- Implemented structured JSON output for medical report analysis
+
+- Added comprehensive error handling and JSON parsing
+
+- Updated UI to call new structured output function
+
+- Added documentation for structured output implementation
+
+
+___
+
+### Diagram Walkthrough
+
+
+```mermaid
+flowchart LR
+  A[""User Input""] --> B[""structuredOutputPrompting()""]
+  B --> C[""Gemini API Call""]
+  C --> D[""JSON Response Processing""]
+  D --> E[""Structured Medical Dat"
+kalviumcommunity/HealthGPT,issues,6,implemented dynamic prompting by creating an array,"['Possible security concern', 'Review effort 2/5']",2025-08-12T04:28:23Z,https://github.com/kalviumcommunity/HealthGPT/pull/6,"### **User description**
+…vious prompts in it
+
+
+___
+
+### **PR Type**
+Enhancement
+
+
+___
+
+### **Description**
+- Implemented dynamic prompting with conversation history tracking
+
+- Added new `dynamicPrompting()` function to maintain context
+
+- Updated UI to use dynamic prompting instead of multi-shot
+
+- Enhanced README with dynamic prompting documentation
+
+
+___
+
+### Diagram Walkthrough
+
+
+```mermaid
+flowchart LR
+  A[""User Input""] --> B[""Dynamic Prompting Function""]
+  B --> C[""Conversation History Ar"
+kalviumcommunity/HealthGPT,issues,3,completed the multi shot prompting task,"['Review effort 4/5', 'Possible security concern']",2025-08-08T04:40:32Z,https://github.com/kalviumcommunity/HealthGPT/pull/3,"### **PR Type**
+Enhancement
+
+
+___
+
+### **Description**
+- Implemented multi-shot prompting for health-focused AI responses
+
+- Refactored code structure by consolidating JavaScript files
+
+- Updated documentation with multi-shot prompting explanation
+
+- Enhanced AI behavior control with medical domain examples
+
+
+___
+
+### Diagram Walkthrough
+
+
+```mermaid
+flowchart LR
+  A[""ZeroShot.js""] -- ""consolidated into"" --> B[""script.js""]
+  B -- ""added"" --> C[""multiShotPrompting()""]
+  C -- ""uses"" --> D[""Medical"
+kalviumcommunity/HealthGPT,issues,2,completed zero shot prompting task,"['Review effort 4/5', 'Possible security concern']",2025-08-07T05:26:17Z,https://github.com/kalviumcommunity/HealthGPT/pull/2,"### **PR Type**
+Enhancement
+
+
+___
+
+### **Description**
+- Implement zero-shot prompting web application using Gemini AI
+
+- Add HTML interface with input field and button
+
+- Create JavaScript function for API integration
+
+- Include environment configuration for API key
+
+
+___
+
+### Diagram Walkthrough
+
+
+```mermaid
+flowchart LR
+  A[""User Input""] --> B[""HTML Interface""]
+  B --> C[""JavaScript Function""]
+  C --> D[""Gemini API Call""]
+  D --> E[""Display Response""]
+  F["".env Config""] --> C
+```
+
+
+
+<details>"
+kalviumcommunity/HealthGPT,issues,1,added readme file,['Review effort 1/5'],2025-08-06T03:59:39Z,https://github.com/kalviumcommunity/HealthGPT/pull/1,"### **PR Type**
+Documentation
+
+
+___
+
+### **Description**
+- Added comprehensive README file for HealthGPT project
+
+- Documented AI-powered medical assistant features and capabilities
+
+- Included setup instructions and tech stack details
+
+- Added security, privacy, and legal disclaimers
+
+
+___
+
+### Diagram Walkthrough
+
+
+```mermaid
+flowchart LR
+  A[""New Project""] --> B[""README.md Created""]
+  B --> C[""Features Documented""]
+  B --> D[""Setup Instructions""]
+  B --> E[""Tech Stack Listed""]
+  B --> F[""Lega"
+microsoft/BioGPT,issues,124,Bump tqdm from 4.64.1 to 4.66.3,['dependencies'],2024-05-03T21:00:31Z,https://github.com/microsoft/BioGPT/pull/124,"Bumps [tqdm](https://github.com/tqdm/tqdm) from 4.64.1 to 4.66.3.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/tqdm/tqdm/releases"">tqdm's releases</a>.</em></p>
+<blockquote>
+<h2>tqdm v4.66.3 stable</h2>
+<ul>
+<li><code>cli</code>: <code>eval</code> safety (fixes CVE-2024-34062, GHSA-g7vv-2v7x-gj9p)</li>
+</ul>
+<h2>tqdm v4.66.2 stable</h2>
+<ul>
+<li><code>pandas</code>: add <code>DataFrame.progress_map</code> (<a href=""https://redirect.github.com/tqdm/tq"
+microsoft/BioGPT,issues,52,Bump protobuf from 3.20.1 to 3.20.2,['dependencies'],2023-02-13T09:05:00Z,https://github.com/microsoft/BioGPT/pull/52,"Bumps [protobuf](https://github.com/protocolbuffers/protobuf) from 3.20.1 to 3.20.2.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/protocolbuffers/protobuf/releases"">protobuf's releases</a>.</em></p>
+<blockquote>
+<h2>Protocol Buffers v3.20.2</h2>
+<h1>C++</h1>
+<ul>
+<li>Reduce memory consumption of MessageSet parsing</li>
+<li>This release addresses a <a href=""https://github.com/protocolbuffers/protobuf/security/advisories/GHSA-8gq9-2x98-w8hf"">Security A"
+microsoft/healthcare-ai-model-evaluator,issues,42,build(deps): Bump filelock from 3.18.0 to 3.20.3 in /functions/requirements,"['dependencies', 'python']",2026-01-13T20:50:48Z,https://github.com/microsoft/healthcare-ai-model-evaluator/pull/42,"Bumps [filelock](https://github.com/tox-dev/py-filelock) from 3.18.0 to 3.20.3.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/tox-dev/py-filelock/releases"">filelock's releases</a>.</em></p>
+<blockquote>
+<h2>3.20.3</h2>
+<!-- raw HTML omitted -->
+<h2>What's Changed</h2>
+<ul>
+<li>Fix TOCTOU symlink vulnerability in SoftFileLock by <a href=""https://github.com/gaborbernat""><code>@​gaborbernat</code></a> in <a href=""https://redirect.github.com/tox-dev/filel"
+microsoft/healthcare-ai-model-evaluator,issues,39,build(deps): Bump aiohttp from 3.11.15 to 3.13.3 in /functions/requirements,"['dependencies', 'python']",2026-01-06T00:07:22Z,https://github.com/microsoft/healthcare-ai-model-evaluator/pull/39,"
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=aiohttp&package-manager=pip&previous-version=3.11.15&new-version=3.13.3)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # "
+microsoft/healthcare-ai-model-evaluator,issues,38,build(deps): Bump marshmallow from 3.26.1 to 3.26.2 in /functions/requirements,"['dependencies', 'python']",2025-12-22T21:11:01Z,https://github.com/microsoft/healthcare-ai-model-evaluator/pull/38,"Bumps [marshmallow](https://github.com/marshmallow-code/marshmallow) from 3.26.1 to 3.26.2.
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/marshmallow-code/marshmallow/blob/3.26.2/CHANGELOG.rst"">marshmallow's changelog</a>.</em></p>
+<blockquote>
+<p>3.26.2 (2025-12-19)
+++++++++++++++++++</p>
+<p>Bug fixes:</p>
+<ul>
+<li>:cve:<code>CVE-2025-68480</code>: Merge error store messages without rebuilding collections.
+Thanks 카푸치노 for reporting and :user:<code>deckar"
+microsoft/healthcare-ai-model-evaluator,issues,37,build(deps): Bump filelock from 3.18.0 to 3.20.1 in /functions/requirements,"['dependencies', 'python']",2025-12-16T22:52:59Z,https://github.com/microsoft/healthcare-ai-model-evaluator/pull/37,"Bumps [filelock](https://github.com/tox-dev/py-filelock) from 3.18.0 to 3.20.1.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/tox-dev/py-filelock/releases"">filelock's releases</a>.</em></p>
+<blockquote>
+<h2>3.20.1</h2>
+<!-- raw HTML omitted -->
+<h2>What's Changed</h2>
+<ul>
+<li>CVE-2025-68146: Fix TOCTOU symlink vulnerability in lock file creation by <a href=""https://github.com/gaborbernat""><code>@​gaborbernat</code></a> in <a href=""https://redirect.gi"
+microsoft/healthcare-ai-model-evaluator,issues,31,build(deps): Bump fonttools from 4.56.0 to 4.61.0 in /functions/requirements,"['dependencies', 'python']",2025-12-01T22:34:43Z,https://github.com/microsoft/healthcare-ai-model-evaluator/pull/31,"Bumps [fonttools](https://github.com/fonttools/fonttools) from 4.56.0 to 4.61.0.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/fonttools/fonttools/releases"">fonttools's releases</a>.</em></p>
+<blockquote>
+<h2>4.61.0</h2>
+<ul>
+<li>[varLib.main]: <strong>SECURITY</strong> Only use basename(vf.filename) to prevent path traversal attacks when running <code>fonttools varLib</code> command-line script, or code which invokes <code>fonttools.varLib.main()</co"
+microsoft/healthcare-ai-model-evaluator,issues,23,Bump js-yaml from 4.1.0 to 4.1.1 in /frontend,"['dependencies', 'javascript']",2025-11-16T14:15:13Z,https://github.com/microsoft/healthcare-ai-model-evaluator/pull/23,"Bumps [js-yaml](https://github.com/nodeca/js-yaml) from 4.1.0 to 4.1.1.
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/nodeca/js-yaml/blob/master/CHANGELOG.md"">js-yaml's changelog</a>.</em></p>
+<blockquote>
+<h2>[4.1.1] - 2025-11-12</h2>
+<h3>Security</h3>
+<ul>
+<li>Fix prototype pollution issue in yaml merge (&lt;&lt;) operator.</li>
+</ul>
+</blockquote>
+</details>
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/nodeca/js-yaml/commit"
+microsoft/healthcare-ai-model-evaluator,issues,19,[WIP] Address feedback on 'Feature/remove static web app' PR,[],2025-11-14T19:07:00Z,https://github.com/microsoft/healthcare-ai-model-evaluator/pull/19,"- [x] Understand the current middleware ordering in Program.cs
+- [x] Reorder middleware to follow ASP.NET Core best practices (UseRouting before UseStaticFiles)
+- [x] Test the changes to ensure static files are still served correctly
+- [x] Validate with linting and building
+- [ ] Run code review
+- [ ] Run security checks
+
+**Changes made:**
+- Moved `UseRouting()` call to execute before `UseStaticFiles()` calls
+- Updated comment to clarify the middleware ordering requirement
+- All 69 tests passing"
+microsoft/healthcare-ai-model-evaluator,issues,4,Bump aiohttp from 3.11.15 to 3.12.14 in /functions/requirements,"['dependencies', 'python']",2025-10-15T15:56:13Z,https://github.com/microsoft/healthcare-ai-model-evaluator/pull/4,"
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=aiohttp&package-manager=pip&previous-version=3.11.15&new-version=3.12.14)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: #"
+mims-harvard/GNNDelete,issues,2,File Missing Issue,[],2023-08-16T12:20:40Z,https://github.com/mims-harvard/GNNDelete/issues/2,"There are 3 prevailing errors in these codes 
+1. from train_mi import MLPAttacker( File may be missing)
+2. from .trainer.graph_editor import GraphEditorTrainer( same)
+3. from .s3io import read_txt_s3, scipy_loadmat_s3
+All modules not found error"
+mims-harvard/GNNGuard,issues,7,A question on hyperparameters,[],2021-08-24T15:46:38Z,https://github.com/mims-harvard/GNNGuard/issues/7,"Hi,
+
+Thanks for your great work!
+
+I have trouble reproducing your results with GIN on Cora under 20% Metattack.  I used the pre-perturbed data provided by DeepRobust with Pro-GNN splits ([data](https://github.com/ChandlerBang/Pro-GNN/tree/master/meta) and [splits](https://github.com/ChandlerBang/Pro-GNN/blob/master/splits/cora_prognn_splits.json)).  However, I only got 58.22±4.04 (10 reps), which is far from 72.2 in your paper.  Even if the dataset split in Pro-GNN is different from yours, I"
+mims-harvard/MedTok,issues,1,License,[],2025-07-15T10:22:25Z,https://github.com/mims-harvard/MedTok/issues/1,"Hi, thank you for your excellent work on the multimodal tokenizer — I found it incredibly helpful and insightful. I've been exploring ways to apply your model to make predictions from medical datasets, and it has proven to be a valuable resource.
+
+To adapt it for our specific use case, some modifications are necessary. I was wondering if you'd be open to adding a license to your repository to clarify usage permissions. This would enable us to utilize and build upon your work more confidently and"
+mims-harvard/TDC,issues,330,website -- MPC task was not migrated,"['bug', 'good first issue', 'website']",2024-11-09T23:41:52Z,https://github.com/mims-harvard/TDC/issues/330,https://github.com/mims-harvard/tdc2website-flask/issues/5
+mims-harvard/TDC,issues,329,"website images not rendering (team, homepage)","['bug', 'good first issue', 'website']",2024-11-04T17:23:43Z,https://github.com/mims-harvard/TDC/issues/329,https://github.com/mims-harvard/tdc2website-flask/issues/4
+mims-harvard/TDC,issues,291,oracle unittests are failing,[],2024-07-03T09:06:33Z,https://github.com/mims-harvard/TDC/issues/291,"w/o question oracles are wrong as per other tickets but note oracle unittests are failing now as well. must investigate. likely related to security vulnerability identified
+=========================== short test summary info ============================
+FAILED tdc/test/test_oracles.py::TestOracle::test_gsk3b - assert 0.03 < 0.0001
+ +  where 0.03 = abs((0.0 - 0.03))
+FAILED tdc/test/test_oracles.py::TestOracle::test_jnk3 - ValueError: node array from the pickle has an incompatible dtype:
+- ex"
+mims-harvard/TDC,issues,289,scperturb issue,['bug'],2024-06-25T00:44:52Z,https://github.com/mims-harvard/TDC/issues/289,"For the perturb-seq dataset, there might be some problem:
+
+ 
+
+from tdc.multi_pred.perturboutcome import PerturbOutcome
+
+data = PerturbOutcome(name = 'scperturb_drug_SrivatsanTrapnell2020_sciplex2')
+
+split = data.get_split() # this line has a problem
+
+    print_sys(""processing cell line"", cell_line)
+
+TypeError: print_sys() takes 1 positional argument but 2 were given"
+mims-harvard/TDC,issues,256,bug in loading scPerturb datasets,"['bug', 'good first issue']",2024-04-30T00:04:15Z,https://github.com/mims-harvard/TDC/issues/256,"Hi @kexinhuang12345, as you know `ReplogleWeissman2022` study has three datasets.
+
+<img width=""1000"" alt=""image"" src=""https://github.com/mims-harvard/TDC/assets/53412130/b9168c27-fa28-44cd-b74c-a67241c1c268"">
+
+___
+Currently, as I understand `ReplogleWeissman2022_K562_gwps` data is not uploaded. However, I noticed a weird behavior when I tried to load it! I had `ReplogleWeissman2022_k562_essential` already downloaded in a `path` folder and then I tried loading `scperturb_gene_ReplogleWeissma"
+mims-harvard/TDC,issues,255,minor fixes for KG scripts,"['bug', 'enhancement', 'new-function']",2024-04-29T02:00:06Z,https://github.com/mims-harvard/TDC/pull/255,"- [x] fill scripts missed from PR #207
+- [x] fix and minor improvements in the `KnowledgeGraph` and `PrimeKGDev` classes
+- [x] write unit tests for `primekg` api, #266"
+mims-harvard/TDC,issues,245,Oracles not satisfying public benchmarks,['bug'],2024-04-10T18:25:13Z,https://github.com/mims-harvard/TDC/issues/245,"              Hi @amva13 , thanks for the fix!
+
+Checking with the other oracles in that specific version, something seems to break in `deco hop`. In the first example of the documentation (the same one I provided above) I went from getting `0.5338...` to getting `0.0`. Weird!
+
+The rest of the oracles seem to work as expected, except for the ones in the issue I raised recently (#244).
+
+see
+https://github.com/mims-harvard/TDC/blob/main/tutorials/User_Group/UserGroupMeeting_Wenhao.ipynb 
+
+"
+mims-harvard/TDC,issues,244,Small discrepancies in the documentation of oracles,"['bug', 'good first issue']",2024-04-10T11:10:04Z,https://github.com/mims-harvard/TDC/issues/244,"**Describe the bug**
+
+I am currently creating an interface for TDC s.t. it works well with SELFIES and other representations of small molecules. In the process I've noticed the following in [the documentation of oracles](https://tdcommons.ai/functions/oracles):
+
+1. It invites the user to create a python env using version 3.7, which is no longer supported by Conda.
+2. In the case of `Sitagliptin_MPO`,`Zaleplon_MPO`, `Isomers_C7H8N2O2`, and `Isomers_C9H10N2O2PF2Cl`, I'm getting different valu"
+mims-harvard/TDC,issues,235,[Docking Leaderboard DRD3] Reproducibility Issues,"['bug', 'good first issue']",2024-03-27T17:34:08Z,https://github.com/mims-harvard/TDC/issues/235,"Dear maintainers of the TDC project,
+
+I'm trying to reproduce the results obtained in the DRD3 docking group benchmark for the GB-GA model.  I am however having a few issues.
+
+1. I cannot seem to reproduce the docking values for some individual molecules. 
+- Some examples taken from the top docking scores reported in the [User Group Meeting](https://github.com/mims-harvard/TDC/blob/main/tutorials/User_Group/UserGroupMeeting_Wenhao.ipynb). I obtain different docking values using the same ora"
+mims-harvard/TDC,issues,212,The bug happens when loading the DUD-E and scPDB dataset,['bug'],2023-10-27T15:53:52Z,https://github.com/mims-harvard/TDC/issues/212,"**Describe the bug**
+The bug happens when loading the DUD-E and scPDB dataset
+
+**To Reproduce**
+Steps to reproduce the behavior:
+1. Just run the demo from your websites
+from tdc.generation import SBDD
+data = SBDD(name='dude')
+
+**Expected behavior**
+Get the data object
+
+**Screenshots**
+Found local copy for 1/2 file...
+Found local copy for 2/2 file...
+Done!
+Processing (this may take long)...
+100%|██████████| 102/102 [07:33<00:00,  4.44s/it]
+processing done, 0/40490 fails
+-------"
+mims-harvard/TDC,issues,199,Compatibility with Pandas 2.0+,['bug'],2023-05-17T20:30:33Z,https://github.com/mims-harvard/TDC/issues/199,"As of Pandas version 2.0, the append() method for DataFrames is deprecated, causing problems loading negative samples.
+
+**To Reproduce**
+With pandas version 2.0+ installed,
+```
+from tdc.multi_pred import MTI
+data = MTI(name = 'miRTarBase')
+data = data.neg_sample(frac = 1)
+```
+causes
+`AttributeError: 'DataFrame' object has no attribute 'append'`
+
+**To Fix**
+For now, you can run neg_sample() with pandas 1.5.3 or below, but compatibility with Pandas version 2.0+ will require replacing "
+mims-harvard/TDC,issues,166,Potential data leakage of ContextPred and AttrMasking on the ADMET group benchmark,['bug'],2022-07-28T01:47:37Z,https://github.com/mims-harvard/TDC/issues/166,"The ContextPred and Attrmasking methods on the ADMET leaderboard were pre-trained on the ChEMBL dataset (https://doi.org/10.1039/C8SC00148K) in a supervised manner. The ChEMBL dataset contains 1310 biochemical assays, in which CHEMBL1741321 corresponds to CYP2D6_Veith, CHEMBL1741324 corresponds to CYP3A4_Veith, CHEMBL1741325 corresponds to CYP2C9_Veith, CHEMBL1909136 corresponds to CYP2D6_Substrate_CarbonMangels, CHEMBL1909135 corresponds to CYP2C9_Substrate_CarbonMangels and CHEMBL1909138 corre"
+mims-harvard/TDC,issues,164,ADMET Plasma Protein Binding dataset is incorrectly translated from the source (AstraZenica),['bug'],2022-07-27T23:21:20Z,https://github.com/mims-harvard/TDC/issues/164,"**Describe the bug**
+The PBBR dataset from AstraZenica in the ADMET TDC group is described as binding in human plasma. I believe approximately 1200 datapoints are actually in other species. PPBR can be highly variable between species, and I cannot see a situation where the different organism plasma used in this data should not be treated explicitly.
+
+
+
+**To Reproduce**
+TDC downloaded via:
+```
+from tdc.single_pred import ADME
+data = ADME(name = 'PPBR_AZ')
+tdc = data.get_data()
+```
+Whi"
+mims-harvard/TDC,issues,163,No module named sklearn.svm.classes,['bug'],2022-07-20T06:50:03Z,https://github.com/mims-harvard/TDC/issues/163,"**Describe the bug**
+
+TDC is incompatible with recent `scikit-learn` versions (>=0.24.0). This is not pinned in the requirements.
+
+Functions like `load_drd2_model` raise:
+```sh
+>             clf_model = pickle.load(f)
+E             ModuleNotFoundError: No module named 'sklearn.svm.classes'
+```
+
+**To Reproduce**
+Try to use the `drd2` oracle with a recent scikit-learn version
+
+**Expected behavior**
+The call should pass
+
+**Environment:**
+- OS: MacOS 
+- Python version: 3.7.12
+- TD"
+mims-harvard/TDC,issues,158,Duplicates in ADMET group test set with different classification labels,['bug'],2022-05-30T08:31:50Z,https://github.com/mims-harvard/TDC/issues/158,"Hello!
+
+We have found some duplicates in the `BBB_Martins` dataset of ADMET group. It appears that some of the duplicates have different classification labels:
+
+```
+group = admet_group(path = 'data/')
+benchmark = group.get('BBB_Martins')
+train_val, test = benchmark['train_val'], benchmark['test']
+
+print(""Train Data Example 1:"")
+print(train_val.iloc[1573])
+print(train_val.iloc[1574])
+
+print(""\nTrain Data Example 2:"")
+print(train_val.iloc[1377])
+print(train_val.iloc[1378])
+
+print("
+mims-harvard/TDC,issues,153,harmonize_data vs. convert_to_log,['bug'],2022-04-27T09:43:27Z,https://github.com/mims-harvard/TDC/issues/153,"Hi and thanks for this great tool!
+Just wanted to mention 2 points:
+1- the function harmonize_data does not modify the data but simply return an aggregated dataframe (this does not match how the function is presented to work (e.g. in here https://tdcommons.ai/multi_pred_tasks/dti/ at bindingDB paragraph)
+2- harmonize_data takes the min of the aggregation, but if data had been previously converted to log this is behaving in the opposite (given the -log in the conversion we now want higher valu"
+mims-harvard/TDC,issues,136,Support strict split for drug synergy prediction task ,['bug'],2022-01-20T20:26:48Z,https://github.com/mims-harvard/TDC/issues/136,"**Describe the bug**
+The current splitting strategies we can use on the available datasets for drug synergy prediction tasks are limited to:
+- the classic random split
+- combination split, such that test samples contain drug pairs unseen to the model after training
+- cold split which can only split by instances of **one modality**, but **not** on multiple modalities, such that test samples contain either drugs **or** cell lines unseen to the model after training
+Hence, `OncoPolyPharmacology"
+mims-harvard/TDC,issues,106,scikit-learn version fixed,['bug'],2021-09-24T00:20:49Z,https://github.com/mims-harvard/TDC/issues/106,"**Describe the problem**
+A clear and concise description of what the problem is. 
+
+**Describe the solution you'd like**
+A clear and concise description of what you want to happen. Ideally, with pseudo-code.
+
+**Additional context**
+Add any other context or screenshots about the feature request here."
+mims-harvard/TDC,issues,98,Same drug-target pair has different affinities in Davis,['bug'],2021-09-07T22:55:26Z,https://github.com/mims-harvard/TDC/issues/98,"**Describe the bug**
+The Davis dataset is assumed to contain a unique affinity value for a drug-target pair. However, in TDC, there are duplicated drug-target pairs with different affinity values.
+
+**To Reproduce**
+```python
+from tdc.multi_pred import DTI
+data = DTI('DAVIS', path='./data/TDC')
+df = data.get_data()
+df = df.drop(columns=['Drug', 'Target'])
+df = df[(df['Drug_ID'] == 25243800) & (df['Target_ID'] == 'RET(V804M)')]
+print(df)
+```
+**Expected behavior**
+The expected output i"
+mims-harvard/ToolUniverse,issues,37,Can ToolUniverse support a fully local LLM deployment (instead of remote API calls)?,[],2025-11-08T07:25:14Z,https://github.com/mims-harvard/ToolUniverse/issues/37,"Hello ToolUniverse team,
+
+I’m currently building a  AI agent using the ToolUniverse framework together with Qwen Code as the LLM backend.
+By default, Qwen Code connects to the cloud using qwen-oauth (remote API calls).
+However, for medical and research environments, we need to run everything locally — including the LLM — for data privacy and compliance reasons.
+I would like to confirm the following:
+1.Can ToolUniverse work with a locally deployed LLM (e.g., Qwen2.5-Coder-7B running on GPU) inste"
+mims-harvard/ToolUniverse,issues,26,feature: add EMBL-EBI Ontology Lookup Service (OLS) tools,[],2025-10-22T21:21:35Z,https://github.com/mims-harvard/ToolUniverse/pull/26,"Sort of an exploration into contributing tools from existing MCP servers.
+
+The Ontology Lookup Service (OLS) is a repository for biomedical ontologies that aims to provide a single point of access to the latest ontology versions. This allows for standardization of biomedical metadata and provides a grounded mapping crucial for meta-analysis across different biomedical datasets.
+
+My team at [CCB ](https://dbmi.hms.harvard.edu/about-dbmi/core-computational-biomedicine) has found moderate succe"
+mims-harvard/ToolUniverse,issues,6,Add MseeP.ai badge,[],2025-07-17T08:57:35Z,https://github.com/mims-harvard/ToolUniverse/pull/6,"Hi there,
+
+This pull request shares a security update on ToolUniverse.
+
+We also have an entry for ToolUniverse in our directory, MseeP.ai, where we provide regular security and trust updates on your app.
+
+We invite you to add our badge for your MCP server to your README to help your users learn from a third party that provides ongoing validation of ToolUniverse.
+
+You can easily take control over your listing for free: visit it at https://mseep.ai/app/mims-harvard-tooluniverse.
+
+Yours Sincerely,
+"
+mims-harvard/ToolUniverse,issues,4,Add MseeP.ai badge,[],2025-06-17T09:46:04Z,https://github.com/mims-harvard/ToolUniverse/pull/4,"Hi there,
+
+This pull request shares a security update on ToolUniverse.
+
+We also have an entry for ToolUniverse in our directory, MseeP.ai, where we provide regular security and trust updates on your app.
+
+We invite you to add our badge for your MCP server to your README to help your users learn from a third party that provides ongoing validation of ToolUniverse.
+
+You can easily take control over your listing for free: visit it at https://mseep.ai/app/mims-harvard-tooluniverse.
+
+Yours Sincerely,
+"
+mims-harvard/decagon,issues,38,Bump tensorflow from 1.8.0 to 2.9.3,['dependencies'],2022-11-21T22:25:52Z,https://github.com/mims-harvard/decagon/pull/38,"Bumps [tensorflow](https://github.com/tensorflow/tensorflow) from 1.8.0 to 2.9.3.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/tensorflow/tensorflow/releases"">tensorflow's releases</a>.</em></p>
+<blockquote>
+<h2>TensorFlow 2.9.3</h2>
+<h1>Release 2.9.3</h1>
+<p>This release introduces several vulnerability fixes:</p>
+<ul>
+<li>Fixes an overflow in <code>tf.keras.losses.poisson</code> (<a href=""https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-4188"
+mims-harvard/decagon,issues,37,Bump protobuf from 3.6.0 to 3.18.3,['dependencies'],2022-09-23T22:05:17Z,https://github.com/mims-harvard/decagon/pull/37,"Bumps [protobuf](https://github.com/protocolbuffers/protobuf) from 3.6.0 to 3.18.3.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/protocolbuffers/protobuf/releases"">protobuf's releases</a>.</em></p>
+<blockquote>
+<h2>Protocol Buffers v3.18.3</h2>
+<h1>C++</h1>
+<ul>
+<li>Reduce memory consumption of MessageSet parsing</li>
+<li>This release addresses a <a href=""https://github.com/protocolbuffers/protobuf/security/advisories/GHSA-8gq9-2x98-w8hf"">Security Ad"
+mims-harvard/decagon,issues,32,Bump tensorflow from 1.8.0 to 2.7.2,['dependencies'],2022-05-26T20:20:17Z,https://github.com/mims-harvard/decagon/pull/32,"Bumps [tensorflow](https://github.com/tensorflow/tensorflow) from 1.8.0 to 2.7.2.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/tensorflow/tensorflow/releases"">tensorflow's releases</a>.</em></p>
+<blockquote>
+<h2>TensorFlow 2.7.2</h2>
+<h1>Release 2.7.2</h1>
+<p>This releases introduces several vulnerability fixes:</p>
+<ul>
+<li>Fixes a code injection in <code>saved_model_cli</code> (<a href=""https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29216"""
+mims-harvard/decagon,issues,31,Bump tensorflow from 1.8.0 to 2.6.4,['dependencies'],2022-05-24T16:55:03Z,https://github.com/mims-harvard/decagon/pull/31,"Bumps [tensorflow](https://github.com/tensorflow/tensorflow) from 1.8.0 to 2.6.4.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/tensorflow/tensorflow/releases"">tensorflow's releases</a>.</em></p>
+<blockquote>
+<h2>TensorFlow 2.6.4</h2>
+<h1>Release 2.6.4</h1>
+<p>This releases introduces several vulnerability fixes:</p>
+<ul>
+<li>Fixes a code injection in <code>saved_model_cli</code> (<a href=""https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29216"""
+mims-harvard/decagon,issues,29,Bump tensorflow from 1.8.0 to 2.5.3,['dependencies'],2022-02-10T00:00:46Z,https://github.com/mims-harvard/decagon/pull/29,"Bumps [tensorflow](https://github.com/tensorflow/tensorflow) from 1.8.0 to 2.5.3.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/tensorflow/tensorflow/releases"">tensorflow's releases</a>.</em></p>
+<blockquote>
+<h2>TensorFlow 2.5.3</h2>
+<h1>Release 2.5.3</h1>
+<p><strong>Note</strong>: This is the last release in the 2.5 series.</p>
+<p>This releases introduces several vulnerability fixes:</p>
+<ul>
+<li>Fixes a floating point division by 0 when executing c"
+mims-harvard/decagon,issues,26,Bump tensorflow from 1.8.0 to 2.5.1,['dependencies'],2021-08-25T15:16:44Z,https://github.com/mims-harvard/decagon/pull/26,"Bumps [tensorflow](https://github.com/tensorflow/tensorflow) from 1.8.0 to 2.5.1.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/tensorflow/tensorflow/releases"">tensorflow's releases</a>.</em></p>
+<blockquote>
+<h2>TensorFlow 2.5.1</h2>
+<h1>Release 2.5.1</h1>
+<p>This release introduces several vulnerability fixes:</p>
+<ul>
+<li>Fixes a heap out of bounds access in sparse reduction operations (<a href=""https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-20"
+mims-harvard/decagon,issues,23,Bump bleach from 1.5.0 to 3.3.0,['dependencies'],2021-02-02T21:49:25Z,https://github.com/mims-harvard/decagon/pull/23,"Bumps [bleach](https://github.com/mozilla/bleach) from 1.5.0 to 3.3.0.
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/mozilla/bleach/blob/master/CHANGES"">bleach's changelog</a>.</em></p>
+<blockquote>
+<h2>Version 3.3.0 (February 1st, 2021)</h2>
+<p><strong>Backwards incompatible changes</strong></p>
+<ul>
+<li>clean escapes HTML comments even when strip_comments=False</li>
+</ul>
+<p><strong>Security fixes</strong></p>
+<ul>
+<li>Fix bug 1621692 / GHSA-m6xf-fq7q-8"
+mims-harvard/decagon,issues,22,Bump tensorflow from 1.8.0 to 2.3.1,['dependencies'],2020-11-13T18:00:39Z,https://github.com/mims-harvard/decagon/pull/22,"Bumps [tensorflow](https://github.com/tensorflow/tensorflow) from 1.8.0 to 2.3.1.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/tensorflow/tensorflow/releases"">tensorflow's releases</a>.</em></p>
+<blockquote>
+<h2>TensorFlow 2.3.1</h2>
+<h1>Release 2.3.1</h1>
+<h2>Bug Fixes and Other Changes</h2>
+<ul>
+<li>Fixes an undefined behavior causing a segfault in <code>tf.raw_ops.Switch</code> (<a href=""https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1519"
+mims-harvard/decagon,issues,21,Bump tensorflow from 1.8.0 to 1.15.4,['dependencies'],2020-09-25T22:58:05Z,https://github.com/mims-harvard/decagon/pull/21,"Bumps [tensorflow](https://github.com/tensorflow/tensorflow) from 1.8.0 to 1.15.4.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/tensorflow/tensorflow/releases"">tensorflow's releases</a>.</em></p>
+<blockquote>
+<h2>TensorFlow 1.15.4</h2>
+<h1>Release 1.15.4</h1>
+<h2>Bug Fixes and Other Changes</h2>
+<ul>
+<li>Fixes an undefined behavior causing a segfault in <code>tf.raw_ops.Switch</code> (<a href=""https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1"
+mims-harvard/decagon,issues,18,Bump bleach from 1.5.0 to 3.1.4,['dependencies'],2020-03-30T23:10:27Z,https://github.com/mims-harvard/decagon/pull/18,"Bumps [bleach](https://github.com/mozilla/bleach) from 1.5.0 to 3.1.4.
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/mozilla/bleach/blob/master/CHANGES"">bleach's changelog</a>.</em></p>
+<blockquote>
+<h2>Version 3.1.4 (March 24th, 2020)</h2>
+<p><strong>Security fixes</strong></p>
+<ul>
+<li>
+<p><code>bleach.clean</code> behavior parsing style attributes could result in a
+regular expression denial of service (ReDoS).</p>
+<p>Calls to <code>bleach.clean</code> "
+mims-harvard/decagon,issues,17,Bump bleach from 1.5.0 to 3.1.2,['dependencies'],2020-03-24T16:10:15Z,https://github.com/mims-harvard/decagon/pull/17,"Bumps [bleach](https://github.com/mozilla/bleach) from 1.5.0 to 3.1.2.
+<details>
+<summary>Changelog</summary>
+<p><em>Sourced from <a href=""https://github.com/mozilla/bleach/blob/master/CHANGES"">bleach's changelog</a>.</em></p>
+<blockquote>
+<h2>Version 3.1.2 (March 11th, 2020)</h2>
+<p><strong>Security fixes</strong></p>
+<ul>
+<li>
+<p><code>bleach.clean</code> behavior parsing embedded MathML and SVG content
+with RCDATA tags did not match browser behavior and could result in
+a mutation XSS.</p>
+<p>"
+mims-harvard/decagon,issues,16,Bump bleach from 1.5.0 to 3.1.1,['dependencies'],2020-02-24T18:20:07Z,https://github.com/mims-harvard/decagon/pull/16,"Bumps [bleach](https://github.com/mozilla/bleach) from 1.5.0 to 3.1.1.
+<details>
+<summary>Changelog</summary>
+
+*Sourced from [bleach's changelog](https://github.com/mozilla/bleach/blob/master/CHANGES).*
+
+> Version 3.1.1 (February 13th, 2020)
+> -----------------------------------
+> 
+> **Security fixes**
+> 
+> * ``bleach.clean`` behavior parsing ``noscript`` tags did not match
+>   browser behavior.
+> 
+>   Calls to ``bleach.clean`` allowing ``noscript`` and one or more of
+>   the raw text tags (``ti"
+mims-harvard/decagon,issues,15,Bump tensorflow from 1.8.0 to 1.15.2,['dependencies'],2020-01-28T22:30:16Z,https://github.com/mims-harvard/decagon/pull/15,"Bumps [tensorflow](https://github.com/tensorflow/tensorflow) from 1.8.0 to 1.15.2.
+<details>
+<summary>Release notes</summary>
+
+*Sourced from [tensorflow's releases](https://github.com/tensorflow/tensorflow/releases).*
+
+> ## TensorFlow 1.15.2
+> # Release 1.15.2
+> 
+> ## Bug Fixes and Other Changes
+> * Fixes a security vulnerability where converting a Python string to a `tf.float16` value produces a segmentation fault ([CVE-2020-5215](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5215)"
+mims-harvard/decagon,issues,9,data leakage problem in your model,[],2019-08-17T19:03:44Z,https://github.com/mims-harvard/decagon/issues/9,"The design of your adjacency matrix `adj_mats_orig` and the way you split the train/test set will cause a huge **data leakage problem** in your training, because your validation and test set is created independently for `gene_adj` and `gene_adj.transpose(copy=True)`, and therefore the edges from the validation / test set in `gene_adj` is actually included in the training set of `gene_adj.transpose(copy=True)`.
+
+Same problem goes for the train / validate set between `gene_drug_adj` and `drug_ge"
+mims-harvard/fastGNMF,issues,7,Bump pillow from 7.0.0 to 9.0.1,['dependencies'],2022-03-12T00:16:54Z,https://github.com/mims-harvard/fastGNMF/pull/7,"Bumps [pillow](https://github.com/python-pillow/Pillow) from 7.0.0 to 9.0.1.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/python-pillow/Pillow/releases"">pillow's releases</a>.</em></p>
+<blockquote>
+<h2>9.0.1</h2>
+<p><a href=""https://pillow.readthedocs.io/en/stable/releasenotes/9.0.1.html"">https://pillow.readthedocs.io/en/stable/releasenotes/9.0.1.html</a></p>
+<h2>Changes</h2>
+<ul>
+<li>In show_file, use os.remove to remove temporary images. CVE-2022-2"
+mims-harvard/fastGNMF,issues,5,Bump pillow from 7.0.0 to 8.3.2,['dependencies'],2021-09-08T01:42:24Z,https://github.com/mims-harvard/fastGNMF/pull/5,"Bumps [pillow](https://github.com/python-pillow/Pillow) from 7.0.0 to 8.3.2.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/python-pillow/Pillow/releases"">pillow's releases</a>.</em></p>
+<blockquote>
+<h2>8.3.2</h2>
+<p><a href=""https://pillow.readthedocs.io/en/stable/releasenotes/8.3.2.html"">https://pillow.readthedocs.io/en/stable/releasenotes/8.3.2.html</a></p>
+<h2>Security</h2>
+<ul>
+<li>
+<p>CVE-2021-23437 Raise ValueError if color specifier is too lon"
+mims-harvard/fastGNMF,issues,4,Bump pillow from 7.0.0 to 8.2.0,['dependencies'],2021-06-08T20:59:39Z,https://github.com/mims-harvard/fastGNMF/pull/4,"Bumps [pillow](https://github.com/python-pillow/Pillow) from 7.0.0 to 8.2.0.
+<details>
+<summary>Release notes</summary>
+<p><em>Sourced from <a href=""https://github.com/python-pillow/Pillow/releases"">pillow's releases</a>.</em></p>
+<blockquote>
+<h2>8.2.0</h2>
+<p><a href=""https://pillow.readthedocs.io/en/stable/releasenotes/8.2.0.html"">https://pillow.readthedocs.io/en/stable/releasenotes/8.2.0.html</a></p>
+<h2>Changes</h2>
+<ul>
+<li>Security fixes for 8.2.0 <a href=""https://github-redirect.dependab"
+olaflaitinen/llm-proteomics-hallucination,issues,14,Potential fix for code scanning alert no. 9: Workflow does not contain permissions,[],2025-11-09T14:48:48Z,https://github.com/olaflaitinen/llm-proteomics-hallucination/pull/14,"Potential fix for [https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/9](https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/9)
+
+To fix this issue, we need to add an explicit, minimal `permissions` block to the `test` job under the `jobs` section of `.github/workflows/test.yml`. Following the principle of least privilege and the way it's handled in other jobs, we'll add `contents: read` to the `test` job. No further changes are nee"
+olaflaitinen/llm-proteomics-hallucination,issues,13,Potential fix for code scanning alert no. 8: Workflow does not contain permissions,[],2025-11-09T14:47:09Z,https://github.com/olaflaitinen/llm-proteomics-hallucination/pull/13,"Potential fix for [https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/8](https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/8)
+
+To fix the problem, add a `permissions` block to the `sbom-generation` job in `.github/workflows/codeql.yml`. This block should set `contents: read`, which is the minimal privilege required to allow artifact upload and repository checkout, matching similar jobs in the workflow (like `dependency-review`). "
+olaflaitinen/llm-proteomics-hallucination,issues,12,Potential fix for code scanning alert no. 6: Workflow does not contain permissions,[],2025-11-09T14:45:17Z,https://github.com/olaflaitinen/llm-proteomics-hallucination/pull/12,"Potential fix for [https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/6](https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/6)
+
+To fix the flagged problem, you should add a `permissions` block to the `dependency-review` job and set it to the minimum required privilege. Based on what the job does—checks out code and runs the `dependency-review-action`—it only needs to read the repository contents. This is achieved by including the "
+olaflaitinen/llm-proteomics-hallucination,issues,11,Potential fix for code scanning alert no. 5: Workflow does not contain permissions,[],2025-11-09T14:44:26Z,https://github.com/olaflaitinen/llm-proteomics-hallucination/pull/11,"Potential fix for [https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/5](https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/5)
+
+**General fix:**  
+Explicitly set a `permissions` block at the root of the workflow file. This block will apply to all jobs that do not explicitly override the permissions.
+
+**Detailed best fix:**  
+Add the block:
+```yaml
+permissions:
+  contents: read
+```
+after the `name:` field (before `on:`).  
+This res"
+olaflaitinen/llm-proteomics-hallucination,issues,10,Potential fix for code scanning alert no. 4: Workflow does not contain permissions,[],2025-11-09T14:43:39Z,https://github.com/olaflaitinen/llm-proteomics-hallucination/pull/10,"Potential fix for [https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/4](https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/4)
+
+To fix the issue, the workflow or the specific job (“test”) must explicitly define a minimal permissions set for the GITHUB_TOKEN. Since none of the steps in the shown workflow require write access to the repository or to pull requests, the most restrictive and appropriate permission for this job is likel"
+olaflaitinen/llm-proteomics-hallucination,issues,9,Potential fix for code scanning alert no. 3: Workflow does not contain permissions,[],2025-11-09T14:43:15Z,https://github.com/olaflaitinen/llm-proteomics-hallucination/pull/9,"Potential fix for [https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/3](https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/3)
+
+To fix this issue, add a `permissions` block to the `coverage` job definition (or to the root of the workflow) that restricts the GITHUB_TOKEN permissions to the minimum required. For this workflow, `actions/checkout` requires `contents: read`, while `actions/upload-artifact` only requires default artifac"
+olaflaitinen/llm-proteomics-hallucination,issues,8,Potential fix for code scanning alert no. 11: Workflow does not contain permissions,[],2025-11-09T14:42:07Z,https://github.com/olaflaitinen/llm-proteomics-hallucination/pull/8,"Potential fix for [https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/11](https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/11)
+
+To fix this issue, an explicit `permissions` block should be added to the `test-slow` job in the `.github/workflows/test.yml` workflow, limiting the GITHUB_TOKEN to the minimum permissions required. For jobs that only read repository contents and do not need to update anything on GitHub, specifying `per"
+olaflaitinen/llm-proteomics-hallucination,issues,7,Potential fix for code scanning alert no. 12: Workflow does not contain permissions,[],2025-11-09T14:40:47Z,https://github.com/olaflaitinen/llm-proteomics-hallucination/pull/7,"Potential fix for [https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/12](https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/12)
+
+To fix the issue, we should set an explicit `permissions` key to limit the GITHUB_TOKEN scope for the workflow. Since the jobs only read source code for linting checks and do not modify repository contents or interact with issues/pull-requests, the minimal required permissions are `{ contents: read }`. "
+olaflaitinen/llm-proteomics-hallucination,issues,6,Potential fix for code scanning alert no. 13: Workflow does not contain permissions,[],2025-11-09T14:40:11Z,https://github.com/olaflaitinen/llm-proteomics-hallucination/pull/6,"Potential fix for [https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/13](https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/13)
+
+To fix the problem, you should add a `permissions` block to the `zenodo-deposit` job in `.github/workflows/release.yml`. Based on the job’s steps—primarily echoing information and, in production, interacting only with Zenodo via external APIs—it appears the job does not need write access to repository c"
+olaflaitinen/llm-proteomics-hallucination,issues,5,Potential fix for code scanning alert no. 14: Workflow does not contain permissions,[],2025-11-09T14:36:00Z,https://github.com/olaflaitinen/llm-proteomics-hallucination/pull/5,"Potential fix for [https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/14](https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/14)
+
+To fix the problem, explicitly declare the `permissions` block to limit the permissions of the GITHUB_TOKEN. This can be done at the workflow root (`permissions:` near the top), which will apply to all jobs, or at the job level (under each job, e.g. under `docker-test:`). As only the `docker-test` job i"
+olaflaitinen/llm-proteomics-hallucination,issues,4,Potential fix for code scanning alert no. 15: Workflow does not contain permissions,[],2025-11-09T14:35:18Z,https://github.com/olaflaitinen/llm-proteomics-hallucination/pull/4,"Potential fix for [https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/15](https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/15)
+
+The best way to fix the problem is to add an explicit `permissions:` block to the `build-paper` job inside `.github/workflows/release.yml`, restricting it to only the permissions needed. Based on the job steps, which only run code checkout, LaTeX build, and upload an artifact, the minimal required permi"
+olaflaitinen/llm-proteomics-hallucination,issues,3,Potential fix for code scanning alert no. 2: Workflow does not contain permissions,[],2025-11-09T14:32:59Z,https://github.com/olaflaitinen/llm-proteomics-hallucination/pull/3,"Potential fix for [https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/2](https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/2)
+
+To fix the issue, add a `permissions` block to the workflow file to restrict the GITHUB_TOKEN permissions to the minimum required. Since this workflow only checks out code, installs dependencies, builds LaTeX, and uploads artifacts (but does NOT modify repository contents or interact with issues/PRs), the"
+olaflaitinen/llm-proteomics-hallucination,issues,2,Potential fix for code scanning alert no. 16: Incomplete regular expression for hostnames,[],2025-11-09T14:30:57Z,https://github.com/olaflaitinen/llm-proteomics-hallucination/pull/2,"Potential fix for [https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/16](https://github.com/olaflaitinen/llm-proteomics-hallucination/security/code-scanning/16)
+
+To fix the issue, escape the dot (`.`) in the regular expression so it matches a literal dot, not any character.  
+Specifically, in line 63:
+```python
+doi = re.sub(r'^https?://dx.doi.org/', '', doi)
+```
+should become:
+```python
+doi = re.sub(r'^https?://dx\.doi\.org/', '', doi)
+```
+Only the two periods i"
+pascalwhoop/medical-mcps,issues,1,SQLite threading issue with CTG client caching,['bug'],2025-11-18T13:30:27Z,https://github.com/pascalwhoop/medical-mcps/issues/1,"## Problem
+
+The ClinicalTrials.gov (CTG) API client uses `hishel.requests.CacheAdapter()` for HTTP caching, which creates SQLite connections that are thread-local. However, the CTG client uses `asyncio.to_thread()` to run synchronous `requests` calls in separate threads, causing SQLite threading errors:
+
+```
+SQLite objects created in a thread can only be used in that same thread. The object was created in thread id 6285668352 and this is thread id 6319321088.
+```
+
+## Affected Tools
+
+- `ctg_searc"
+s-uryansh/GladMeds,issues,1,Fix React Server Components CVE vulnerabilities,[],2025-12-17T01:01:11Z,https://github.com/s-uryansh/GladMeds/pull/1,"> [!IMPORTANT]
+> This is an automatic PR generated by Vercel to help you with patching efforts. We can't guarantee it's comprehensive, and it may contain mistakes. Please review our [guidance](https://vercel.link/additional-checks) before merging these changes.
+
+A critical remote code execution (RCE) vulnerability in React Server Components, impacting frameworks such as Next.js, was identified in the project [gladmeds](https://vercel.com/suryansh-rohils-projects/gladmeds). The vulnerability enab"
+the-momentum/open-wearables,issues,375,Apple Health device & software are wrong,"['bug', 'backend', 'apple health']",2026-01-21T15:59:15Z,https://github.com/the-momentum/open-wearables/issues/375,We need to fix registering devices and device softwwares for Apple Health.
+the-momentum/open-wearables,issues,373,fix(backend): fix multiple Apple Health issues,"['bug', 'backend', 'apple health']",2026-01-21T14:40:18Z,https://github.com/the-momentum/open-wearables/pull/373,"- Sleep efficiency changes
+- Changes to calculating bmi
+- Height now returned in meters from apple SDK
+- percentages now returned as percentages, not ratios
+
+Also:
+- Moved constant schemas away from data point repository
+- Event record service doesnt directly query data from database now, instead creating a new method in repository and using mapping repo as well
+
+Resolves #357 
+Resolves #353 
+Resolves #351
+Resolves #346
+Resolves #352 
+"
+the-momentum/open-wearables,issues,341,Field name mismatch between backend and frontend for workouts,"['bug', 'frontend']",2026-01-20T12:30:25Z,https://github.com/the-momentum/open-wearables/issues/341,"### Problem
+
+Frontend `EventRecordResponse` type uses different field names than the backend `Workout` schema, causing workout metrics to display as empty/undefined.
+
+### Field name mismatches
+
+| Backend returns | Frontend expected |
+|-----------------|-------------------|
+| `avg_heart_rate_bpm` | `heart_rate_avg` |
+| `max_heart_rate_bpm` | `heart_rate_max` |
+| `elevation_gain_meters` | `total_elevation_gain` |
+
+### Affected files
+
+- `backend/app/schemas/events.py` - `Workout` schema
+- `frontend"
+the-momentum/open-wearables,issues,324,Apple Health sync takes too much time,"['bug', 'backend', 'apple health']",2026-01-17T20:08:40Z,https://github.com/the-momentum/open-wearables/issues/324,"Tasks in celery take even up to 180 seconds each.
+
+We can reduce it to less than 1 second."
+the-momentum/open-wearables,issues,319,fix: Datapoint bulk,"['bug', 'backend', 'apple health']",2026-01-16T13:35:38Z,https://github.com/the-momentum/open-wearables/pull/319,"Resolves #324
+Avg ~0.5 s per task"
+the-momentum/open-wearables,issues,310,Connection status does not update in UI after successful OAuth authorization,"['bug', 'frontend']",2026-01-14T15:07:05Z,https://github.com/the-momentum/open-wearables/issues/310,"Currently, after a user successfully completes the OAuth authorization flow and is redirected back to the application via the specified redirect_url, the UI does not automatically update to reflect the new connection state. The interface (Developer Portal or integrated widget) continues to suggest the provider is available for connection, even though the backend should have the connection marked as active
+
+https://github.com/user-attachments/assets/1d8a845b-1b96-4c16-898d-f77d694c4bc4"
+the-momentum/open-wearables,issues,309,fix: Added sentry handling celery exceptions,"['bug', 'backend']",2026-01-14T12:00:30Z,https://github.com/the-momentum/open-wearables/pull/309,"Closes #308 
+
+1) Added Celery integration for Sentry.
+2) Added Sentry helper to log unpropagated errors.
+3) Updated AGENTS.md"
+the-momentum/open-wearables,issues,308,Sentry doesn't catch errors from celery,"['bug', 'backend']",2026-01-14T11:59:32Z,https://github.com/the-momentum/open-wearables/issues/308,"Now in celery tassk it's intentional to let application flow even though error happened. This is because we don't want to have entire flow failed because of one failed task. But this way sentry won't catch exception, since it's not correctly propagated."
+the-momentum/open-wearables,issues,304,fix: .env.example missing redirect_uris,"['bug', 'backend']",2026-01-13T14:09:24Z,https://github.com/the-momentum/open-wearables/pull/304,Closes #303 
+the-momentum/open-wearables,issues,303,Missing redirect_uri envs in .env.example,"['bug', 'backend']",2026-01-13T14:07:09Z,https://github.com/the-momentum/open-wearables/issues/303,"- Garmin
+- Suunto
+- Polar"
+the-momentum/open-wearables,issues,302,Inconsistent workout mapping and excessive null fields for Whoop,['bug'],2026-01-13T11:41:17Z,https://github.com/the-momentum/open-wearables/issues/302,"The [list-workouts endpoint](https://docs.openwearables.io/api-reference/events/list-workouts) returns excessive null values for the Whoop provider and fails to correctly map common activity types (like Gym). See examples below:
+
+```json
+{
+    ""data"": [
+        {
+            ""id"": ""933cd47f-7467-4ef3-9b36-e20eb2a19d03"",
+            ""type"": ""running"",
+            ""name"": null,
+            ""start_time"": ""2026-01-11T18:07:54Z"",
+            ""end_time"": ""2026-01-11T19:31:20.007000Z"",
+            ""dur"
+the-momentum/open-wearables,issues,297,Fix timeseries duplicates issue,"['bug', 'backend']",2026-01-12T14:53:48Z,https://github.com/the-momentum/open-wearables/pull/297,"Add unique constraint to data_point_series table
+
+Resolves #291 
+
+Be careful with merging, as it can mess with production if there already are duplicate time series values - alembic wont allow an upgrade, if you delete data point series data from db beforehand there shouldnt be an issue (can check first with switching branches on railway)"
+the-momentum/open-wearables,issues,293,Sleep data synced via Apple Health not available through sleep summary endpoint,"['bug', 'apple health']",2026-01-12T12:20:51Z,https://github.com/the-momentum/open-wearables/issues/293,"Sleep data synced from Apple Health isn't showing up when I query the sleep summary endpoint despited I granted required permission. 
+
+<img width=""300"" height=""700"" alt=""Image"" src=""https://github.com/user-attachments/assets/8fde7419-c9c6-4565-aeda-2b9afa31ebd1"" />
+
+
+It's related to https://github.com/the-momentum/open-wearables/issues/290. 
+
+## Steps to reproduce:
+
+1. Install the app from TestFlight (sample app) - request an invitation if you don't have access
+2. Sync your Apple Health data
+3. "
+the-momentum/open-wearables,issues,292,Calories data synced via Apple Health SDK unavailable via timeseries endpoint despite granted permission,"['bug', 'apple health']",2026-01-12T12:13:25Z,https://github.com/the-momentum/open-wearables/issues/292,"I've granted permission for calories data (see screenshot), but when querying the timeseries endpoint, no calorie data is returned.
+
+<img width=""300"" height=""700"" alt=""Image"" src=""https://github.com/user-attachments/assets/f72e8905-b924-4655-b676-227cbce82fd3"" />
+
+```json
+{
+    ""data"": [],
+    ""pagination"": {
+        ""next_cursor"": null,
+        ""previous_cursor"": null,
+        ""has_more"": false,
+        ""total_count"": 0
+    },
+    ""metadata"": {
+        ""resolution"": null,
+        ""sample_count"""
+the-momentum/open-wearables,issues,291,Timeseries data synced via Apple Health SDK contain duplicates,"['bug', 'apple health']",2026-01-12T12:08:30Z,https://github.com/the-momentum/open-wearables/issues/291,"When I query, for example, my steps via:
+https://docs.openwearables.io/api-reference/timeseries/get-timeseries
+
+I get those values:
+
+```
+{
+    ""data"": [
+        {
+            ""timestamp"": ""2026-01-01T00:05:11Z"",
+            ""type"": ""steps"",
+            ""value"": 22.0,
+            ""unit"": ""count""
+        },
+        {
+            ""timestamp"": ""2026-01-01T00:05:11Z"",
+            ""type"": ""steps"",
+            ""value"": 22.0,
+            ""unit"": ""count""
+        },
+        {
+            ""timestamp"": ""202"
+the-momentum/open-wearables,issues,290,Apple Health sleep data not syncing despite granted permissions,"['bug', 'apple health']",2026-01-12T11:25:04Z,https://github.com/the-momentum/open-wearables/issues/290,"Sleep data from Apple Health is not being synced to the Open Wearables platform despite the sample app using requesting and receiving sleep data permissions from the user. The /v1/users/{user_id}/sleep endpoint returns empty results
+
+<img width=""300"" height=""700"" alt=""Image"" src=""https://github.com/user-attachments/assets/588e91a7-ee66-488e-a306-0adffc0d871f"" />
+
+```json
+{
+    ""data"": [],
+    ""pagination"": {
+        ""next_cursor"": null,
+        ""previous_cursor"": null,
+        ""has_more"": false,"
+the-momentum/open-wearables,issues,289,Apple Health workout data sync - missing field values and Incorrect activity type mapping,"['bug', 'apple health']",2026-01-12T11:01:43Z,https://github.com/the-momentum/open-wearables/issues/289,"When syncing workout data from Apple Health via the SDK ([sample app](https://github.com/the-momentum/health_bg_sync/pull/3)), the workout records are returned with most critical fields as null and activity types are incorrectly mapped to ""other"" regardless of the actual workout type. 
+
+Payload based on my personal data:
+
+```
+{
+    ""data"": [
+        {
+            ""id"": ""6e04404b-42d6-4f4d-9010-05b284a6d234"",
+            ""type"": ""other"",
+            ""name"": null,
+            ""start_time"": ""2026-0"
+the-momentum/open-wearables,issues,288,HIPAA compliance support and PHI data handling,['security'],2026-01-12T08:30:22Z,https://github.com/the-momentum/open-wearables/issues/288,"As healthcare organizations evaluate Open Wearables for production use, we need to address compliance requirements and data protection standards for handling Protected Health Information (PHI).
+
+# Areas to address:
+
+## Access Tracking & Accountability
+- Implementation of comprehensive audit logging
+- Tracking data access patterns (user, timestamp, authentication method)
+- Retention policies for audit records
+
+## Current Logging Practices Review
+- Assessment of existing error tracking and monitor"
+the-momentum/open-wearables,issues,281,HRV Data Integrity: Suunto RMSSD being stored as SDNN series type,"['bug', 'backend', 'data model']",2026-01-09T15:31:30Z,https://github.com/the-momentum/open-wearables/issues/281,"### Description
+
+We have a data integrity issue where Suunto's HRV data (which is RMSSD) is being incorrectly stored under the `heart_rate_variability_sdnn` series type.
+
+### Current Behavior
+
+| Provider | Metric Provided | Stored As |
+|----------|-----------------|-----------|
+| Apple Health | SDNN | `heart_rate_variability_sdnn` ✅ |
+| Suunto | RMSSD | `heart_rate_variability_sdnn` ❌ |
+
+Two clinically different metrics are being mixed into the same series type.
+
+### Evidence
+
+- **Apple Health**"
+the-momentum/open-wearables,issues,278,Manual syncing data providers needs to be async to avoid timeouts,"['bug', 'backend']",2026-01-09T13:46:56Z,https://github.com/the-momentum/open-wearables/issues/278,
+the-momentum/open-wearables,issues,277,Whoop: read:workout scope missing,"['bug', 'backend']",2026-01-09T13:44:19Z,https://github.com/the-momentum/open-wearables/issues/277,
+the-momentum/open-wearables,issues,276,Whoop: validation errors,"['bug', 'backend']",2026-01-09T13:43:54Z,https://github.com/the-momentum/open-wearables/issues/276,Workouts  models needs to be updated
+the-momentum/open-wearables,issues,261,fix: Suunto & syncing issues,"['bug', 'backend']",2026-01-07T20:30:52Z,https://github.com/the-momentum/open-wearables/pull/261,"Fixes #252 
+Fixes #254 
+Resolves #259 
+
+Partially implements #255
+Partially implements #260 "
+the-momentum/open-wearables,issues,252,Suunto background sync validation error,"['bug', 'backend']",2026-01-05T23:55:14Z,https://github.com/the-momentum/open-wearables/issues/252,"1 validation error for SyncVendorDataResult start_date Input should be a valid string [type=string_type, input_value=datetime.datetime(2026, 1, 5, 18, 24, 2, 773838), input_type=datetime] For further information visit https://errors.pydantic.dev/2.12/v/string_type "
+the-momentum/open-wearables,issues,246,Invalid Whoop svg logo,"['bug', 'backend']",2026-01-05T14:05:02Z,https://github.com/the-momentum/open-wearables/issues/246,"<img width=""1800"" height=""1372"" alt=""Image"" src=""https://github.com/user-attachments/assets/05a189c1-7ec6-4fbf-a4c7-924abdb0656d"" />
+
+
+It can be tested by local url: http://localhost:8000/static/provider-icons/whoop.svg
+For reference working suunto logo: http://localhost:8000/static/provider-icons/suunto.svg
+
+Logo is located in backend."
+the-momentum/open-wearables,issues,216,Dashboard Recent users section is always empty,"['bug', 'frontend']",2025-12-22T23:26:32Z,https://github.com/the-momentum/open-wearables/issues/216,
+the-momentum/open-wearables,issues,214,Workout endpoint doesn't work on frontend,"['bug', 'frontend']",2025-12-22T22:32:17Z,https://github.com/the-momentum/open-wearables/issues/214,
+the-momentum/open-wearables,issues,206,feat(auth): Add SDK user-scoped token authentication,[],2025-12-19T11:41:52Z,https://github.com/the-momentum/open-wearables/pull/206,"## Description
+
+Implement a new authentication flow for OpenWearables SDK that provides user-scoped JWT tokens for mobile apps to push health data.
+
+**Key changes:**
+- New endpoint `POST /api/v1/users/{external_user_id}/token` for exchanging app credentials for user-scoped JWT
+- New Application model for SDK app registration (separate from existing ApiKey)
+- SDK tokens are scoped to only authorize `/sdk/` data push endpoints
+- All other endpoints return 401 for SDK tokens (security by de"
+the-momentum/open-wearables,issues,141,Remove 'Sign up' and Privacy buttons from main page,[],2025-12-08T13:23:01Z,https://github.com/the-momentum/open-wearables/pull/141,
+the-momentum/open-wearables,issues,140,`/workouts` endpoint returns empty array despite seeded data,"['bug', 'backend']",2025-12-08T13:11:15Z,https://github.com/the-momentum/open-wearables/issues/140,"After running make init to seed sample data, calling GET `/api/v1/users/{user_id}/workouts` returns an empty array [] even though there should be workout records in the database.
+
+Steps to reproduce:
+1. `docker compose up -d`
+2. `make init`
+3. Login as `admin@admin.com` / `secret123`
+4. Get user list via GET `/api/v1/users`
+5. Call GET `/api/v1/users/{user_id}/workouts` for any seeded user
+6. Response: []"
+the-momentum/open-wearables,issues,136,Disable open registration - security risk,['backend'],2025-12-08T12:20:06Z,https://github.com/the-momentum/open-wearables/issues/136,"Anyone with API link can create account and access all data - big security hole for self-hosted deployments.
+
+I see two options for now:
+- Hide behind auth - require logged-in developer to create users. Here I see the problem that no one wants to set passwords on behalf of users.
+- Remove endpoint completely - cleaner approach, add invite flow later (admin sends email -> user sets own password)
+
+I would go with second approach - less code to maintain now, proper invite system comes later "
+the-momentum/open-wearables,issues,135,TypeError: AppleWorkouts missing abstract method implementations causing /api/v1/oauth/providers endpoint failure,['bug'],2025-12-08T12:07:32Z,https://github.com/the-momentum/open-wearables/issues/135,"The GET /api/v1/oauth/providers endpoint returns a 500 error when attempting to retrieve the list of providers. The error occurs during initialization of AppleStrategy, which tries to create an instance of AppleWorkouts.
+
+`TypeError: Can't instantiate abstract class AppleWorkouts without an implementation for abstract methods '_extract_dates', 'get_workout_detail_from_api', 'get_workouts_from_api', 'load_data'` 
+
+We don't need to have those methods to return Apple as provider. "
+the-momentum/open-wearables,issues,114,No success screen / info displayed after successful provider authorisation,"['bug', 'frontend']",2025-12-04T17:12:06Z,https://github.com/the-momentum/open-wearables/issues/114,"After successful authorization with provider, user doesn't see success screen. Please see below:
+
+https://github.com/user-attachments/assets/e3828513-d824-4937-91c1-6792144635c5
+
+"
+the-momentum/open-wearables,issues,113,OAuth flow fails for second user after completing first user's Polar authorization,"['bug', 'frontend']",2025-12-04T17:09:23Z,https://github.com/the-momentum/open-wearables/issues/113,"**This is not a critical bug, I think in practice it rather won't occur**
+
+In the case when I already went through the authorization flow for Polar with one user, another attempt to go through the flow for another user didn't work (see the video):
+
+https://github.com/user-attachments/assets/0c85ed51-f582-4861-a1e7-140f74caeebd"
+the-momentum/open-wearables,issues,104,`X-Open-Wearables-API-Key` authentication not working / inconsistent across endpoints,"['bug', 'backend']",2025-12-04T08:46:31Z,https://github.com/the-momentum/open-wearables/issues/104,"API Key authentication via X-Open-Wearables-API-Key header doesn't seem to work properly and the OpenAPI spec is inconsistent about which endpoints support it.
+
+**Auth not working where documented:**
+`POST /api/v1/users` has `X-Open-Wearables-API-Key` defined as optional header param in the spec, but requests with valid API key return 401. Only OAuth2 bearer token works.
+
+**Auth not documented (and likely not supported) where expected:**
+`GET /api/v1/users` doesn't have `X-Open-Wearables-API-Key"
+tolu-c/HealthGPT,issues,14,Remove MongoDB Credentials from code,['bug'],2023-11-22T01:07:12Z,https://github.com/tolu-c/HealthGPT/issues/14,"- Revoke the credentials, delete it and create a new one
+- store the credential in a `.env` file
+- make sure you're not pushing the `.env` file"
+tolu-c/HealthGPT,issues,13,Remove node modules from your backend code,['bug'],2023-11-22T01:00:47Z,https://github.com/tolu-c/HealthGPT/issues/13,
+ubicomplab/rPPG-Toolbox,issues,395,Perfect evaluation results,[],2025-06-22T07:58:20Z,https://github.com/ubicomplab/rPPG-Toolbox/issues/395,"Thanks for your great work!
+
+I’m using the toolbox you provided to run my new method. Fortunately, I’m seeing strong performance across various benchmark datasets, but occasionally MAE, RMSE, MAPE, and Pearson metrics all report exactly 0 and 1.0. 
+
+When I visualize the results, I would expect the predictions to match the ground truth perfectly, but they do not (But good enough). I’ve double-checked every modification to the evaluation metrics and confirmed there is no data leakage. Could you gi"
+ubicomplab/rPPG-Toolbox,issues,388,Problems bash.sh uv,['bug'],2025-04-10T11:55:16Z,https://github.com/ubicomplab/rPPG-Toolbox/issues/388,"To work with the rPPG-Toolbox, I followed the official README’s recommendation and chose to use WSL together with uv instead of conda. The goal is to use the pre-trained models.
+
+![Image](https://github.com/user-attachments/assets/1d726b4e-533e-4efd-8577-540c1d0a2561)
+
+I have taken the following steps so far:
+1. git clone https://github.com/ubicomplab/rPPG-Toolbox.git
+2. cd rPPG-Toolbox
+3. curl -Ls https://astral.sh/uv/install.sh | bash 
+4. bash setup.sh uv
+
+There were no errors in steps 1-3, ev"
+ubicomplab/rPPG-Toolbox,issues,376,Question about running PhysFormer,['bug'],2025-03-09T03:42:41Z,https://github.com/ubicomplab/rPPG-Toolbox/issues/376,"Hello, I am very sorry that I have a new problem. I reprocessed the file according to your instructions, but found the error again today:
+Traceback (most recent call last):
+  File ""main.py"", line 313, in <module>
+    train_and_test(config, data_loader_dict)
+  File ""main.py"", line 86, in train_and_test
+    model_trainer.train(data_loader_dict)
+  File ""G:\rPPG-Toolbox-main\neural_methods\trainer\PhysFormerTrainer.py"", line 111, in train
+    rPPG, _, _, _ = self.model(data, gra_sharp)
+  File ""D:\Pr"
+xkaper001/DocPilot,issues,21,Implement Sign Up Screen,"['enhancement', 'authentication', 'doctor-app']",2025-10-17T12:52:52Z,https://github.com/xkaper001/DocPilot/issues/21,"## Description
+Implement the registration/sign up screen for new doctor accounts.
+
+## Design Reference
+Figma Frame: `Sign up` (576:2987, 576:2972)
+
+## Requirements
+- [ ] Full name input field
+- [ ] Email input field with validation
+- [ ] Password input field with strength indicator
+- [ ] Confirm password input field
+- [ ] Terms & Conditions checkbox with clickable text
+- [ ] Privacy Policy acceptance
+- [ ] ""Sign up"" button
+- [ ] Keyboard handling (dismiss on scroll/tap outside)
+- [ ] Form valida"
+xkaper001/DocPilot,issues,8,"Enhanced CODE_OF_CONDUCT.md with improved guidelines, reporting proce…",[],2025-09-17T15:30:17Z,https://github.com/xkaper001/DocPilot/pull/8,"## Summary
+This PR updates the CODE_OF_CONDUCT.md file for DocPilot:
+
+- Pulled the latest Contributor Covenant **v3.0**.
+- Retained all healthcare-specific considerations (patient privacy, medical accuracy, accessibility, data security, professionalism).
+- Fixed Markdown spacing issues and duplicate FAQ links.
+- Clarified the reporting email placeholder ([maintainer@example.com]).
+- Polished formatting and readability for clarity.
+
+All sections and original structure have been preserved"
